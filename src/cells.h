@@ -5,4 +5,12 @@
 #ifndef CELLS_H
 #define CELLS_H
 
+
+class Cell {
+  public:
+    Cell() {
+  }
+}
+
+
 #endif //CELLS_H
