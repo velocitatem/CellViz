@@ -1,0 +1,3 @@
+/Users/sm_aswin21/Desktop/project/CellViz/build/CMakeFiles/CellViz.dir
+/Users/sm_aswin21/Desktop/project/CellViz/build/CMakeFiles/edit_cache.dir
+/Users/sm_aswin21/Desktop/project/CellViz/build/CMakeFiles/rebuild_cache.dir
