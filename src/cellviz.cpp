@@ -7,6 +7,7 @@
 #include <vector>
 
 #include "board.h"
+#include "cells.h"
 
 using namespace std;
 
@@ -28,6 +29,23 @@ int main(int argc, char *argv[])
 
   // nxn board of TYPE for SIZE
   Board board(5, 5, CONTINUOUS, 3);
+  double ** data;
+
+  // populate board
+  string species = "x";
+  for (int i = 0 ; i < 3; i++) {
+    board.add_cell(ParticleLife(i,i,species+="x"));
+  }
+
+
+  while (true) {
+    // UPDATE DATA
+    Board new_board = ParticleLife::compute(&board);
+    board = new_board;
+    // TODO: render board
+
+  }
+
 
 
 
