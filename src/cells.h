@@ -6,11 +6,20 @@
 #define CELLS_H
 
 
-class Cell {
-  public:
-    Cell() {
-  }
-}
+class CellularAutomaton {};
+
+class ParticleLife : public CellularAutomaton {
+public:
+    ParticleLife(int x, int y); //TODO: Color
+    static void compute();
+};
+
+class Lenia : public CellularAutomaton {
+    // TODO
+};
+
+
+
 
 
 #endif //CELLS_H
