@@ -1,1 +1,7 @@
 cmake-build-debug/
+
+# Ignore build folder
+build/
+
+# Ignore vscode settings folder
+.vscode/
