@@ -2,81 +2,147 @@
 #include <string>
 #include <curl/curl.h>
 #include <thread>
-#include <nlohmann/json.hpp>  // Include nlohmann/json library
-#include <fstream>  // Include fstream for file handling
+#include <nlohmann/json.hpp>
+#include <fstream>
+#include <functional>
+#include <chrono>
+#include <regex>
+#include <boost/algorithm/string.hpp>
 
-// Function to handle incoming data from libcurl
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s)
 {
     size_t totalSize = size * nmemb;
-    s->append((char*)contents, totalSize);
+    s->append(reinterpret_cast<const char*>(contents), totalSize);
     return totalSize;
 }
 
-// Function to fetch data from API and save it as JSON
-void fetchData(const std::string& symbol, const std::string& interval, const std::string& apikey)
-{
+void fetchDataWithRetry(const std::string& apikey, bool adjusted = true, bool extended_hours = true, const std::string& month = "", const std::string& outputsize = "compact", const std::string& datatype = "json", int maxRetries = 3) {
     CURL* curl;
     CURLcode res;
     std::string readBuffer;
-    
-    std::string url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=" + symbol + "&interval=" + interval + "&apikey=" + apikey;
-    
+
+    std::string url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=" + apikey;
+    url += "&adjusted=" + std::string(adjusted ? "true" : "false");
+    url += "&extended_hours=" + std::string(extended_hours ? "true" : "false");
+    if (!month.empty()) {
+        url += "&month=" + month;
+    }
+    url += "&outputsize=" + outputsize;
+    url += "&datatype=" + datatype;
+
+    int retries = 0;
+    bool success = false;
+
     curl = curl_easy_init();
-    if (curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-        curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
-        curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-        res = curl_easy_perform(curl);
-        
-        if (res != CURLE_OK) {
-            std::cerr << "curl_easy_perform() failed: " << curl_easy_strerror(res) << std::endl;
+    if (curl != nullptr) {
+        do {
+            curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, WriteCallback);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
+            curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 2L);
+
+            res = curl_easy_perform(curl);
+
+            if (res == CURLE_OK) {
+                success = true;
+                break;
+            } else {
+                std::cerr << "Attempt " << retries + 1 << " failed: " << curl_easy_strerror(res) << std::endl;
+                retries++;
+                if (retries < maxRetries) {
+                    int delay = std::pow(2, retries) * 1000; // Exponential backoff in milliseconds
+                    std::this_thread::sleep_for(std::chrono::milliseconds(delay));
+                }
+            }
+        } while (retries < maxRetries);
+
+        if (!success) {
+            std::cerr << "All retry attempts failed." << std::endl;
         } else {
             // Parse and save the JSON data
             try {
                 auto jsonData = nlohmann::json::parse(readBuffer);
-                
+                std::cout << "Metadata: " << jsonData["Meta Data"].dump(4) << std::endl;
+
                 // Save JSON data to a file
                 std::ofstream outFile("output.json");
                 if (outFile.is_open()) {
-                    outFile << jsonData.dump(4);
+                    outFile << jsonData.dump(4);  // Pretty print JSON
                     outFile.close();
                     std::cout << "JSON data saved to output.json" << std::endl;
                 } else {
                     std::cerr << "Unable to open file to save JSON data" << std::endl;
                 }
-            } catch (nlohmann::json::parse_error& e) {
-                std::cerr << "JSON parsing error: " << e.what() << std::endl;
+            } catch (nlohmann::json::exception& e) {
+                std::cerr << "JSON error: " << e.what() << std::endl;
             }
         }
-        
+
         curl_easy_cleanup(curl);
+    } else {
+        std::cerr << "Failed to initialize curl" << std::endl;
     }
 }
 
-// Main function that uses threading to dynamically load data
-int main()
+// Function to read the API key from the secrets file
+std::string readApiKey(const std::string& filePath)
 {
-    std::string symbol = "IBM";
-    std::string interval = "5min";
-    
-    // Load API key from secrets.json
-    std::ifstream secretsFile("secrets.json");
-    nlohmann::json secretsJson;
-    if (secretsFile.is_open()) {
-        secretsFile >> secretsJson;
-        secretsFile.close();
-    } else {
-        std::cerr << "Unable to open secrets.json" << std::endl;
-        return 1;
+    try {
+        std::ifstream inFile(filePath);
+        if (!inFile.is_open()) {
+            throw std::runtime_error("Unable to open secrets file: " + filePath);
+        }
+
+        nlohmann::json secretsJson = nlohmann::json::parse(inFile);
+        inFile.close();
+
+        if (!secretsJson.contains("apikey") || !secretsJson["apikey"].is_string()) {
+            throw std::invalid_argument("API key not found or is invalid in secrets file");
+        }
+
+        std::string apiKey = secretsJson["apikey"].get<std::string>();
+        boost::algorithm::trim(apiKey);
+
+        // Validate API key (example: at least 16 characters, alphanumeric)
+        std::regex apiKeyPattern("^[a-zA-Z0-9]{16,}$");
+        if (!std::regex_match(apiKey, apiKeyPattern)) {
+            throw std::invalid_argument("Invalid API key format");
+        }
+
+        return apiKey;
+    } catch (const nlohmann::json::exception& e) {
+        throw std::runtime_error("Error parsing JSON: " + std::string(e.what()));
     }
-    std::string apikey = secretsJson["apikey"].get<std::string>();
-    
-    // Launch thread for fetching data
-    std::thread apiThread(fetchData, symbol, interval, apikey);
-    
-    // Join the thread to make sure main waits for it to complete
-    apiThread.join();
+}
+
+int main(int argc, char* argv[])
+{
+    // Initialize CURL globally
+    curl_global_init(CURL_GLOBAL_DEFAULT);
+    try {
+        if (argc > 5) {
+            std::cerr << "Usage: " << argv[0] << " [adjusted] [extended_hours] [month] [outputsize] [datatype]" << std::endl;
+            return 1;
+        }
+
+        std::string apikey = readApiKey("secrets.json");  // Read API key from secrets file
+
+        bool adjusted = (argc > 1) ? (std::string(argv[1]) == "true") : true;
+        bool extended_hours = (argc > 2) ? (std::string(argv[2]) == "true") : true;
+        std::string month = (argc > 3) ? argv[3] : "";
+        std::string outputsize = (argc > 4) ? argv[4] : "compact";
+        std::string datatype = (argc > 5) ? argv[5] : "json";
+        
+        // Use a lambda to start the thread
+        std::thread apiThread([=]() { fetchDataWithRetry(apikey, adjusted, extended_hours, month, outputsize, datatype); });
+        
+        apiThread.join();
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
+    // Clean up CURL globally
+    curl_global_cleanup();
     
     return 0;
 }
