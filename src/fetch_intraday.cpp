@@ -4,7 +4,7 @@
 #include <thread>
 #include <nlohmann/json.hpp>
 #include <fstream>
-#include <functional>  // Required for std::ref and std::reference_wrapper
+#include <functional>  
 
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s)
 {
@@ -106,12 +106,10 @@ int main()
         std::string interval = "5min";
         std::string apikey = readApiKey("secrets.json");  // Read API key from secrets file
         
-        // Create a thread for fetching data, passing arguments by reference using a lambda function
         std::thread apiThread([&symbol, &interval, &apikey]() {
             fetchDataWithRetry(std::ref(symbol), std::ref(interval), std::ref(apikey));
         });
         
-        // Wait for the thread to complete
         apiThread.join();
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;

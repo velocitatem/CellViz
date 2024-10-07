@@ -9,11 +9,10 @@ build/
 data.cpp
 fetch.cpp
 
-src/data
+- src/data
 
-src/fetch
+- src/fetch
 
-src/movies.json
+
 src/show_data.json
-
 secrets.json
