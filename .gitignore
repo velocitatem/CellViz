@@ -6,3 +6,14 @@ build/
 # Ignore vscode settings folder
 .vscode/
 
+data.cpp
+fetch.cpp
+
+src/data
+
+src/fetch
+
+src/movies.json
+src/show_data.json
+
+secrets.json
