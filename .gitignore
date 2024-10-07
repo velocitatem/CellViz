@@ -6,8 +6,6 @@ build/
 # Ignore vscode settings folder
 .vscode/
 
-data.cpp
-fetch.cpp
 
 - src/data
 
