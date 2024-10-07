@@ -13,7 +13,7 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s)
     return totalSize;
 }
 
-//  To fetch data from API and save it as JSON
+// Function to fetch data from API and save it as JSON
 void fetchData(const std::string& symbol, const std::string& interval, const std::string& apikey)
 {
     CURL* curl;
@@ -37,7 +37,7 @@ void fetchData(const std::string& symbol, const std::string& interval, const std
                 auto jsonData = nlohmann::json::parse(readBuffer);
                 std::cout << jsonData.dump(4) << std::endl;
                 
-                //  JSON data to a file
+                // Save JSON data to a file
                 std::ofstream outFile("output.json");
                 if (outFile.is_open()) {
                     outFile << jsonData.dump(4);
@@ -55,17 +55,36 @@ void fetchData(const std::string& symbol, const std::string& interval, const std
     }
 }
 
+// Function to read the API key from secrets file
+std::string readApiKey(const std::string& filePath)
+{
+    std::ifstream inFile(filePath);
+    if (!inFile.is_open()) {
+        throw std::runtime_error("Unable to open secrets file");
+    }
+    
+    nlohmann::json secretsJson;
+    inFile >> secretsJson;
+    inFile.close();
+    
+    return secretsJson["apikey"].get<std::string>();
+}
+
 int main()
 {
-    std::string symbol = "IBM";
-    std::string interval = "5min";
-    std::string apikey = "3WKYPXLT8BF4D95F";  
-    
-    //  thread for fetching data
-    std::thread apiThread(fetchData, symbol, interval, apikey);
-    
-    //   thread to make sure main waits for it to complete
-    apiThread.join();
+    try {
+        std::string symbol = "IBM";
+        std::string interval = "5min";
+        std::string apikey = readApiKey("secrets.json");  // Read API key from secrets file
+        
+        // Create a thread for fetching data
+        std::thread apiThread(fetchData, symbol, interval, apikey);
+        
+        // Wait for the thread to complete
+        apiThread.join();
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+    }
     
     return 0;
 }
