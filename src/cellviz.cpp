@@ -28,22 +28,26 @@ int main(int argc, char *argv[])
 
 
   // nxn board of TYPE for SIZE
-  Board board(5, 5, CONTINUOUS, 3);
+  Board board(5, 5, GRID, 3);
   double ** data;
 
   // populate board
   string species = "x";
   for (int i = 0 ; i < 3; i++) {
-    board.add_cell(ParticleLife(i,i,species+="x"));
+    SmithLife *cell = new SmithLife(i, i, 1.0);
+    board.add_cell(cell);
   }
 
 
-  while (true) {
+  int MAX_IT = 20, i = 0;
+  while (i < MAX_IT) {
     // UPDATE DATA
     Board new_board = ParticleLife::compute(&board);
     board = new_board;
-    // TODO: render board
+    // RENDER
+    board.render();
 
+    i+=1;
   }
 
 

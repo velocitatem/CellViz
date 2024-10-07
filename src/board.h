@@ -8,6 +8,8 @@
 #include "cells.h"
 
 class CellularAutomaton;
+class DiscreteAutomaton;
+class ContinuousAutomaton;
 
 enum BoardType {
     GRID = 0,
@@ -18,14 +20,18 @@ class Board {
 public:
     Board(int width, int height, BoardType type, int population);
     ~Board();
-    auto get_field();
+    DiscreteAutomaton ** get_grid();
+    ContinuousAutomaton * get_continuous();
     void render();
-    void add_cell(CellularAutomaton cell);
+    void add_cell(CellularAutomaton *cell);
+    int get_current_population();
+    int get_width(); int get_height();
+
 private:
     int width, height, population, current_population;
     BoardType type;
-    CellularAutomaton **grid;
-    CellularAutomaton *continuous; //TODO: Change to vector
+    DiscreteAutomaton **grid;
+    ContinuousAutomaton *continuous; //TODO: Change to vector
 };
 
 

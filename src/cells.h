@@ -12,11 +12,32 @@
 class Board;
 using namespace std;
 
+
 class CellularAutomaton {
-    static void compute(Board *board);
+public:
+protected:
+    CellularAutomaton() = default;
+    static void compute(Board *board); // Make compute a pure virtual function
+public:
+    virtual ~CellularAutomaton() = default;
 };
 
-class ParticleLife : public CellularAutomaton {
+class DiscreteAutomaton : public CellularAutomaton {
+public:
+    virtual double get_value() = 0;
+    virtual int get_x() = 0;
+    virtual int get_y() = 0;
+private:
+    int x, y;
+    double value;
+};
+
+class ContinuousAutomaton : public CellularAutomaton {
+public:
+    static void compute(Board *board); // Pure virtual function for DiscreteAutomaton
+};
+
+class ParticleLife : public ContinuousAutomaton {
 public:
     ParticleLife(int x, int y, string species); //TODO: Color
     int get_x();
@@ -28,11 +49,21 @@ private:
     string species;
 };
 
-class Lenia : public CellularAutomaton {
-    // TODO
+class SmithLife : public DiscreteAutomaton {
+public:
+    SmithLife(int x, int y, double value);
+    int get_x(); int get_y();
+    double get_value();
+    static Board compute(Board *board);
+private:
+    int x, y;
+    double value;
+
 };
 
-
+class Lenia : public DiscreteAutomaton {
+    // TODO
+};
 
 
 
