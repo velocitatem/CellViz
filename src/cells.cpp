@@ -13,9 +13,9 @@ x(x), y(y), species(species) {
 
 Board ParticleLife::compute(Board *board) {
     map<string, ContinuousAutomaton> cellular_automaton;
-    ContinuousAutomaton *all = board->get_continuous();
+    vector<ContinuousAutomaton*> all = board->get_continuous();
     for (int i = 0; i < board->get_current_population(); i += 1) {
-        CellularAutomaton cell = all[i];
+        ContinuousAutomaton cell = *all[i];
         //cellular_automaton.insert(make_pair(cell.species, CellularAutomaton()));
     }
 
@@ -36,9 +36,14 @@ int SmithLife::get_y() { return y; }
 
 double SmithLife::get_value() { return value; }
 
-Board SmithLife::compute(Board *board) {
-
-    return *board;
-
+void SmithLife::compute(Board *board) {
+    vector<vector<DiscreteAutomaton*>> grid = board->get_grid();
+    for (int i = 0; i < board->get_current_population(); i += 1) {
+        DiscreteAutomaton *cell = grid[i][i];
+        if (cell) {
+            grid[i][i] = new SmithLife(cell->get_x(), cell->get_y(), cell->get_value()+1);
+        }
+    }
+    board->set_board(grid);
 }
 

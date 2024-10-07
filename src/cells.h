@@ -40,6 +40,12 @@ public:
 class ParticleLife : public ContinuousAutomaton {
 public:
     ParticleLife(int x, int y, string species); //TODO: Color
+    // copy
+    ParticleLife(const ParticleLife &cell) {
+        x = cell.x;
+        y = cell.y;
+        species = cell.species;
+    }
     int get_x();
     int get_y();
     string get_species();
@@ -54,7 +60,7 @@ public:
     SmithLife(int x, int y, double value);
     int get_x(); int get_y();
     double get_value();
-    static Board compute(Board *board);
+    static void compute(Board *board);
 private:
     int x, y;
     double value;

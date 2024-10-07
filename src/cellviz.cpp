@@ -37,13 +37,14 @@ int main(int argc, char *argv[])
     SmithLife *cell = new SmithLife(i, i, 1.0);
     board.add_cell(cell);
   }
+  CellularAutomaton * c = board.get_cell(1,1);
 
 
   int MAX_IT = 20, i = 0;
   while (i < MAX_IT) {
     // UPDATE DATA
-    Board new_board = ParticleLife::compute(&board);
-    board = new_board;
+    SmithLife::compute(&board);
+    //board = new_board;
     // RENDER
     board.render();
 
