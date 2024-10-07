@@ -27,26 +27,30 @@ int main(int argc, char *argv[])
 {
 
 
+  int Z = 100;
   // nxn board of TYPE for SIZE
-  Board board(5, 5, GRID, 3);
+  Board board(Z, Z, GRID, 3);
   double ** data;
+
 
   // populate board
   string species = "x";
-  for (int i = 0 ; i < 3; i++) {
-    SmithLife *cell = new SmithLife(i, i, 1.0);
+  for (int i = 0 ; i < Z; i++) {
+    int x = rand() % 100;
+    SmithLife *cell = new SmithLife(i, i, x);
     board.add_cell(cell);
   }
   CellularAutomaton * c = board.get_cell(1,1);
 
 
-  int MAX_IT = 20, i = 0;
+  int MAX_IT = Z, i = 0;
   while (i < MAX_IT) {
     // UPDATE DATA
     SmithLife::compute(&board);
     //board = new_board;
     // RENDER
-    board.render();
+    if (i == MAX_IT-1)
+      board.render();
 
     i+=1;
   }
