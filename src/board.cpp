@@ -20,6 +20,22 @@ Board::Board(int width, int height, BoardType type, int population) :
     }
 }
 
+Board::Board(const Board &board) {
+    width = board.width;
+    height = board.height;
+    type = board.type;
+    population = board.population;
+    current_population = board.current_population;
+    if (type == GRID) {
+        grid = board.grid;
+    }
+    else if (type == CONTINUOUS) {
+        continuous = board.continuous;
+    }
+}
+
+
+
 Board::~Board() {
     if (type == GRID) {
         for (auto& row : grid) {

@@ -22,15 +22,7 @@ class Board {
 public:
     Board(int width, int height, BoardType type, int population = 0);
     // copy constructor
-    Board(const Board &board) {
-        width = board.width;
-        height = board.height;
-        type = board.type;
-        population = board.population;
-        current_population = board.current_population;
-        grid = board.grid;
-        continuous = board.continuous;
-    }
+    Board(const Board &board);
     ~Board();
 
     void add_cell(CellularAutomaton *cell);
