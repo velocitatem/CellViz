@@ -24,18 +24,14 @@ target_include_directories(CellViz PUBLIC ${PROJECT_SOURCE_DIR}/src)
 find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS})
 
-# Add test executable
 add_executable(runTests
+    tests/tests.cpp
+    src/cells.cpp
+    src/board.cpp
+)
 
-        tests/tests.cpp
-
-        src/cells.cpp
-        src/board.cpp
-        src/cells.h src/board.h
-        src/fetch_intraday.cpp)
 target_link_libraries(runTests GTest::GTest GTest::Main pthread)
 target_include_directories(runTests PUBLIC ${PROJECT_SOURCE_DIR}/src)
-
 
 # Link the required libraries
 target_link_libraries(CellViz curl jsoncpp pthread boost_system)

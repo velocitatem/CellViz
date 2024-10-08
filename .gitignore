@@ -10,5 +10,4 @@ CMakeFiles/
 .vscode/
 build/
 
-src/secrets.json
-src/Makefile
+secrets.json
