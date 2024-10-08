@@ -1,13 +1,39 @@
 cmake_minimum_required(VERSION 3.10)
+
+# Set the project name
 project(CellViz)
 
-set(JSONCPP_INCLUDE_DIR "/opt/homebrew/Cellar/jsoncpp/1.9.6/include" CACHE PATH "Path to JsonCpp include directory")
-include_directories(${JSONCPP_INCLUDE_DIR})
-add_executable(CellViz src/cellviz.cpp src/cells.cpp src/data.cpp)
-include_directories(/opt/homebrew/Cellar/jsoncpp/1.9.6/include)
+# Specify the C++ standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 # Add the executable
-add_executable(CellViz src/data.cpp)
+add_executable(CellViz
+        src/cellviz.cpp
+        src/cells.cpp
+        src/board.cpp
+        src/fetch_intraday.cpp
+)
 
-# Link the JSON library
-target_link_libraries(CellViz jsoncpp)
+# Include directories (for header files)
+target_include_directories(CellViz PUBLIC ${PROJECT_SOURCE_DIR}/src)
+
+# Find and link Google Test
+find_package(GTest REQUIRED)
+include_directories(${GTEST_INCLUDE_DIRS})
+
+# Add test executable
+add_executable(runTests
+
+        tests/tests.cpp
+
+        src/cells.cpp
+        src/board.cpp
+        src/cells.h src/board.h
+        src/fetch_intraday.cpp)
+target_link_libraries(runTests GTest::GTest GTest::Main pthread)
+target_include_directories(runTests PUBLIC ${PROJECT_SOURCE_DIR}/src)
+
+# Enable tests
+enable_testing()
+add_test(NAME runTests COMMAND runTests)
