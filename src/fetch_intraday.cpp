@@ -24,9 +24,11 @@ void fetchDataWithRetry(const std::string& apikey, bool adjusted = true, bool ex
     std::string url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=" + apikey;
     url += "&adjusted=" + std::string(adjusted ? "true" : "false");
     url += "&extended_hours=" + std::string(extended_hours ? "true" : "false");
+    
     if (!month.empty()) {
         url += "&month=" + month;
     }
+
     url += "&outputsize=" + outputsize;
     url += "&datatype=" + datatype;
 
@@ -104,7 +106,7 @@ std::string readApiKey(const std::string& filePath)
         std::string apiKey = secretsJson["apikey"].get<std::string>();
         boost::algorithm::trim(apiKey);
 
-        // Validate API key (example: at least 16 characters, alphanumeric)
+        
         std::regex apiKeyPattern("^[a-zA-Z0-9]{16,}$");
         if (!std::regex_match(apiKey, apiKeyPattern)) {
             throw std::invalid_argument("Invalid API key format");
@@ -118,7 +120,7 @@ std::string readApiKey(const std::string& filePath)
 
 int main(int argc, char* argv[])
 {
-    // Initialize CURL globally
+    
     curl_global_init(CURL_GLOBAL_DEFAULT);
     try {
         if (argc > 5) {
@@ -141,7 +143,7 @@ int main(int argc, char* argv[])
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
     }
-    // Clean up CURL globally
+    // Clean up CURL
     curl_global_cleanup();
     
     return 0;
