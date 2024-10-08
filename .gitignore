@@ -10,10 +10,4 @@ CMakeFiles/
 .vscode/
 
 
-- src/data
-
-- src/fetch
-
-
-src/show_data.json
-secrets.json
+src/secrets.json

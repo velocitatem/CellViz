@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.10)
 # Set the project name
 project(CellViz)
 
+include_directories(/opt/homebrew/include)
+
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -34,6 +36,11 @@ add_executable(runTests
 target_link_libraries(runTests GTest::GTest GTest::Main pthread)
 target_include_directories(runTests PUBLIC ${PROJECT_SOURCE_DIR}/src)
 
+
+# Link the required libraries
+target_link_libraries(CellViz curl jsoncpp pthread boost_system)
+
 # Enable tests
 enable_testing()
 add_test(NAME runTests COMMAND runTests)
+
