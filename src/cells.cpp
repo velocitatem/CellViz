@@ -44,6 +44,6 @@ void SmithLife::compute(Board *board) {
             grid[i][i] = new SmithLife(cell->get_x(), cell->get_y(), cell->get_value()+1);
         }
     }
-    board->set_board(grid);
+    board->set_grid(grid);
 }
 

@@ -60,7 +60,8 @@ void Board::add_cell(CellularAutomaton *cell) {
     }
     else if (type == GRID) {
         auto *discrete_cell = dynamic_cast<DiscreteAutomaton*>(cell);
-        if (discrete_cell && discrete_cell->get_x() < width && discrete_cell->get_y() < height) {
+        if (discrete_cell && discrete_cell->get_x() >= 0 && discrete_cell->get_x() < width
+            && discrete_cell->get_y() >= 0 && discrete_cell->get_y() < height) {
             grid[discrete_cell->get_x()][discrete_cell->get_y()] = discrete_cell;
             current_population++;
         }
@@ -68,24 +69,30 @@ void Board::add_cell(CellularAutomaton *cell) {
 }
 
 
-vector<vector<DiscreteAutomaton*>> Board::get_grid() {
+vector<vector<DiscreteAutomaton*>> Board::get_grid() const {
     return grid;
 }
 
-void Board::set_board(vector<vector<DiscreteAutomaton*>> grid) {
+void Board::set_grid(vector<vector<DiscreteAutomaton*>> &grid) {
     this->grid = grid;
 }
 
-vector<ContinuousAutomaton*> Board::get_continuous() {
+vector<ContinuousAutomaton*> Board::get_continuous() const {
     return continuous;
 }
+
+void Board::set_continuum(vector<ContinuousAutomaton*> &continuous) {
+    this->continuous = continuous;
+}
+
+
 
 
 int Board::get_current_population() {
     return current_population;
 }
 
-CellularAutomaton* Board::get_cell(int x, int y) {
+CellularAutomaton* Board::get_cell(int x, int y) const {
     if (type == GRID && x >= 0 && x < height && y >= 0 && y < width) {
         return grid[x][y];
     }
@@ -95,7 +102,7 @@ CellularAutomaton* Board::get_cell(int x, int y) {
     return nullptr;
 }
 
-void Board::render() {
+void Board::render () {
     if (type == CONTINUOUS) {
         for (int i = 0; i < current_population; i++) {
             // Rendering code for continuous automaton
@@ -110,13 +117,7 @@ void Board::render() {
                     printf("0 ");
                     continue;
                 }
-                DiscreteAutomaton* cell;
-                try {
-                    cell = dynamic_cast<DiscreteAutomaton*>(c);
-                }
-                catch (const std::bad_cast& e) {
-                    cell = nullptr;
-                }
+                DiscreteAutomaton* cell = dynamic_cast<DiscreteAutomaton*>(c);
                 if (cell) {
                     printf("%d ", static_cast<int>(cell->get_value()));
                 } else {

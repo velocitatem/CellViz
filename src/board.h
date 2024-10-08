@@ -26,13 +26,15 @@ public:
     ~Board();
 
     void add_cell(CellularAutomaton *cell);
-    void set_board(vector<vector<DiscreteAutomaton*>> grid);
-    void set_continuum(vector<ContinuousAutomaton*> continuous);
-    CellularAutomaton* get_cell(int x, int y);
-    vector<ContinuousAutomaton*> get_continuous();
-    vector<vector<DiscreteAutomaton*>> get_grid();
+    void set_grid(vector<vector<DiscreteAutomaton*>> & grid);
+    void set_continuum(vector<ContinuousAutomaton*> & continuous);
+    CellularAutomaton* get_cell(int x, int y) const;
+    vector<ContinuousAutomaton*> get_continuous() const;
+    vector<vector<DiscreteAutomaton*>> get_grid() const;
     int get_current_population();
     void render();
+    // TODO: Add a move constructor, copy assignment operator, and move assignment operator.
+
 
 private:
     int width;
