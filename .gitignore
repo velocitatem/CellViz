@@ -9,7 +9,11 @@ CMakeFiles/
 # Ignore vscode settings folder
 .vscode/
 
-# Ignore secrets file containing API keys
-src/secrets.json
 
-src/Makefile
+- src/data
+
+- src/fetch
+
+
+src/show_data.json
+secrets.json
