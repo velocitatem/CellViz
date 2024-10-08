@@ -4,9 +4,7 @@
 
 
 #include <gtest/gtest.h>
-
-/// tes t1 + 1
-///
+#include <board.h>
 
 TEST(test1, test1) {
     EXPECT_EQ(1, 1);
