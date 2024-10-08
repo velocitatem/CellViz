@@ -8,6 +8,7 @@ CMakeFiles/
 
 # Ignore vscode settings folder
 .vscode/
-
+build/
 
 src/secrets.json
+src/Makefile
