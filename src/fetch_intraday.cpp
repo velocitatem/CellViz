@@ -8,6 +8,7 @@
 #include <chrono>
 #include <regex>
 #include <boost/algorithm/string.hpp>
+#include <cstdlib>
 
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s)
 {
@@ -87,40 +88,8 @@ void fetchDataWithRetry(const std::string& apikey, bool adjusted = true, bool ex
     }
 }
 
-// Function to read the API key from the secrets file
-std::string readApiKey(const std::string& filePath)
-{
-    try {
-        std::ifstream inFile(filePath);
-        if (!inFile.is_open()) {
-            throw std::runtime_error("Unable to open secrets file: " + filePath);
-        }
-
-        nlohmann::json secretsJson = nlohmann::json::parse(inFile);
-        inFile.close();
-
-        if (!secretsJson.contains("apikey") || !secretsJson["apikey"].is_string()) {
-            throw std::invalid_argument("API key not found or is invalid in secrets file");
-        }
-
-        std::string apiKey = secretsJson["apikey"].get<std::string>();
-        boost::algorithm::trim(apiKey);
-
-        
-        std::regex apiKeyPattern("^[a-zA-Z0-9]{16,}$");
-        if (!std::regex_match(apiKey, apiKeyPattern)) {
-            throw std::invalid_argument("Invalid API key format");
-        }
-
-        return apiKey;
-    } catch (const nlohmann::json::exception& e) {
-        throw std::runtime_error("Error parsing JSON: " + std::string(e.what()));
-    }
-}
-
 int main(int argc, char* argv[])
 {
-    
     curl_global_init(CURL_GLOBAL_DEFAULT);
     try {
         if (argc > 5) {
@@ -128,7 +97,10 @@ int main(int argc, char* argv[])
             return 1;
         }
 
-        std::string apikey = readApiKey("secrets.json");  // Read API key from secrets file
+        const char* apikey = std::getenv("API_KEY");
+        if (apikey == nullptr) {
+            throw std::runtime_error("API key not found in environment variables.");
+        }
 
         bool adjusted = (argc > 1) ? (std::string(argv[1]) == "true") : true;
         bool extended_hours = (argc > 2) ? (std::string(argv[2]) == "true") : true;
