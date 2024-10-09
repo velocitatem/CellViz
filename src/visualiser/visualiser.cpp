@@ -1,8 +1,8 @@
 #include <SFML/Graphics.hpp>
 
-#include "backend/cellviz.h"
-#include "backend/board.h"
-#include "backend/cells.h"
+#include "cellviz.h"
+#include "board.h"
+#include "cells.h"
 
 double GetValueFromBoard(Board &board, int x, int y){
     CellularAutomaton* c = board.get_cell(x, y);
