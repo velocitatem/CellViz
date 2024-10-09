@@ -9,5 +9,5 @@ CMakeFiles/
 # Ignore vscode settings folder
 .vscode/
 build/
-
-secrets.json
+src/Makefile
+.env
