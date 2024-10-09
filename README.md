@@ -14,7 +14,7 @@ Standardized for Ubuntu:
 
 ```bash
 sudo apt update
-sudo apt-get install libboost-all-dev libjsoncpp-dev nlohmann-json-dev libsfml-dev
+sudo apt-get install libboost-all-dev libjsoncpp-dev nlohmann-json3-dev libsfml-dev
 ```
 
 Alpha vantage key `export API_KEY=XXX`
