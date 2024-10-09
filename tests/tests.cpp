@@ -32,6 +32,21 @@ TEST(BoardTest, AddCell) {
     EXPECT_EQ(cell3->get_value(), 8.0);
 }
 
+TEST(BoardTest, AddCell2) {
+    Board board(5, 5, GRID, 3);
+    SmithLife *cell = new SmithLife(0, 0, 8.0);
+    board.add_cell(cell);
+    SmithLife *cell2 = new SmithLife(0, 0, 8.0);
+    board.add_cell(cell2);
+    EXPECT_EQ(board.get_current_population(), 2);
+    CellularAutomaton *cell3 = board.get_cell(0, 0);
+    DiscreteAutomaton *cell4 = dynamic_cast<DiscreteAutomaton*>(cell3);
+    // state persistence
+    EXPECT_EQ(cell4->get_x(), 0);
+    EXPECT_EQ(cell4->get_y(), 0);
+    EXPECT_EQ(cell4->get_value(), 8.0);
+}
+
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
