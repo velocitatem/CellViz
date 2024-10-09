@@ -27,17 +27,24 @@ int main(int argc, char *argv[])
 {
 
 
-  int Z = 100;
+  int Z = 10;
   // nxn board of TYPE for SIZE
-  Board board(Z, Z, GRID, 3);
+  Board board(Z, Z, GRID, Z*Z);
   double ** data;
 
 
   // populate board
   string species = "x";
-  for (int i = 0 ; i < Z; i++) {
-    int x = rand() % 100;
-    SmithLife *cell = new SmithLife(i, i, x);
+  for (int i = 0 ; i < Z*Z; i++) {
+    int random_x = 0;
+    int random_y = 0;
+    while (board.get_cell(random_x, random_y) != nullptr) {
+      random_x = rand() % Z;
+      random_y = rand() % Z;
+    }
+
+    int x = rand() % 10;
+    SmithLife *cell = new SmithLife(random_x, random_y, x);
     board.add_cell(cell);
   }
   CellularAutomaton * c = board.get_cell(1,1);

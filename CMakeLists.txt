@@ -12,6 +12,8 @@ add_executable(CellViz
         src/cellviz.cpp
         src/cells.cpp
         src/board.cpp
+        src/data.cpp
+        src/data.h
 )
 
 target_include_directories(CellViz PUBLIC ${PROJECT_SOURCE_DIR}/src)
@@ -24,7 +26,7 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 target_link_libraries(CellViz curl jsoncpp pthread ${Boost_LIBRARIES})
 
-add_executable(data src/fetch_intraday.cpp) # TODO: move to individual library
+add_executable(data src/fetch_intraday.cpp src/data.cpp src/data.h) # TODO: move to individual library
 target_link_libraries(data curl jsoncpp pthread ${Boost_LIBRARIES})
 
 # Find and link Google Test
