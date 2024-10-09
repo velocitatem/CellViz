@@ -13,7 +13,8 @@ add_executable(CellViz
         src/cells.cpp
         src/board.cpp
         src/data.cpp
-        src/visualiser/visualiser.cpp
+        src/visualiser.cpp
+        src/visualizer.h
 )
 
 # Include directories (for header files)

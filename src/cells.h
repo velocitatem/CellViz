@@ -62,12 +62,25 @@ private:
     string species;
 };
 
+
+class BasicLife : public DiscreteAutomaton {
+public:
+    BasicLife(int x, int y, double value);
+    int get_x(); int get_y();
+    double get_value();
+    static void compute(Board *board);
+private:
+    int x, y;
+    double value;
+};
+
+
 class SmithLife : public DiscreteAutomaton {
 public:
     SmithLife(int x, int y, double value);
     int get_x(); int get_y();
     double get_value();
-    static void compute(Board *board);
+    static void compute(Board &board);
 private:
     int x, y;
     double value;

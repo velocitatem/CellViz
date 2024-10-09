@@ -9,18 +9,6 @@
 #include "board.h"
 #include "cells.h"
 
-using namespace std;
-
-
-void show_grid(vector<vector<int> > grid, int N) {
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
-      cout << grid[i][j] << " ";
-    }
-    cout << endl;
-  }
-
-}
 
 using namespace std;
 Board initialise_board(int size)
@@ -45,7 +33,7 @@ Board initialise_board(int size)
     int MAX_IT = size, i = 0;
     while (i < MAX_IT) {
         // UPDATE DATA
-        SmithLife::compute(&board);
+        SmithLife::compute(board);
         //board = new_board;
         // RENDER
         if (i == MAX_IT-1)
