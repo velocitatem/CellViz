@@ -6,6 +6,8 @@
 #include <fstream>
 #include <functional>  
 
+
+
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s)
 {
     size_t totalSize = size * nmemb;
