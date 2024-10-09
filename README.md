@@ -1,6 +1,20 @@
 # CellViz
 Cellular Automata (inspired by live-data) in order to visualize multidimensional & high-throughput data.
 
+## Requirements
+
++ Boost dev libraries (not runtime)
+
+Standardized for Ubuntu:
+
+```bash
+sudo apt update
+sudo apt-get install libboost-all-dev libjsoncpp-dev nlohmann-json-dev
+```
+
+Alpha vantage key `export API_KEY=XXX`
+
+## Structure
 
 
 ```mermaid

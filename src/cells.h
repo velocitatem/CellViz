@@ -5,6 +5,7 @@
 #include <string>
 #ifndef CELLS_H
 #define CELLS_H
+#include <nlohmann/json.hpp>
 
 
 #include "board.h"
@@ -27,6 +28,9 @@ public:
     virtual double get_value() = 0;
     virtual int get_x() = 0;
     virtual int get_y() = 0;
+    void set_x(int x);
+    void set_y(int y);
+    void set_value(double value);
 private:
     int x, y;
     double value;
@@ -36,6 +40,9 @@ class ContinuousAutomaton : public CellularAutomaton {
 public:
     static void compute(Board *board); // Pure virtual function for DiscreteAutomaton
 };
+
+/// ====== END OF ABSTRACT CLASSES ====== ///
+
 
 class ParticleLife : public ContinuousAutomaton {
 public:
@@ -66,11 +73,6 @@ private:
     double value;
 
 };
-
-class Lenia : public DiscreteAutomaton {
-    // TODO
-};
-
 
 
 #endif //CELLS_H
