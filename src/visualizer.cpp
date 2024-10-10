@@ -27,6 +27,5 @@ void NewVisualizer(Board &board, sf::RenderWindow *window, int cellSize) {
             window->draw(rectangle);
         }
     }
-
     window->display();
 }

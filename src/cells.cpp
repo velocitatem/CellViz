@@ -8,11 +8,7 @@
 
 using json = nlohmann::json;
 
-ParticleLife::ParticleLife(int x, int y, string species) :
-x(x), y(y), species(species) {
-
-}
-
+ParticleLife::ParticleLife(int x, int y, string species) : x(x), y(y), species(species) { }
 Board ParticleLife::compute(Board *board) {
     map<string, ContinuousAutomaton> cellular_automaton;
     vector<ContinuousAutomaton*> all = board->get_continuous();
@@ -20,7 +16,6 @@ Board ParticleLife::compute(Board *board) {
         ContinuousAutomaton cell = *all[i];
         //cellular_automaton.insert(make_pair(cell.species, CellularAutomaton()));
     }
-
     return *board;
 }
 
@@ -29,14 +24,10 @@ void DiscreteAutomaton::set_y(int y) { y = y; }
 void DiscreteAutomaton::set_value(double value) { value = value; }
 
 
-
-
 SmithLife::SmithLife(int x, int y, double value) : x(x), y(y), value(value) {}
 int SmithLife::get_x() { return x; }
 int SmithLife::get_y() { return y; }
 double SmithLife::get_value() { return value; }
-
-
 
 void CellularAutomaton::compute(Board *board) {
     vector<vector<DiscreteAutomaton*>> grid = board->get_grid();
@@ -111,7 +102,7 @@ void SmithLife::compute(Board &board) {
                     }
                 }
                 if (cell->get_value() == 1) {
-                    if (count < 2 || count > 3) {
+                    if (count < 0 || count > 4) {
                         grid[i][j] = nullptr;
                     }
                 } else {
@@ -130,7 +121,6 @@ BasicLife::BasicLife(int x, int y, double value) : x(x), y(y), value(value) {}
 int BasicLife::get_x() { return x; }
 int BasicLife::get_y() { return y; }
 double BasicLife::get_value() { return value; }
-
 void BasicLife::compute(Board *board) {
     std::vector<std::vector<DiscreteAutomaton*>> grid = board->get_grid();
     for (int i = 0; i < board->get_height(); i++) {
