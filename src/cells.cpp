@@ -75,9 +75,11 @@ void CellularAutomaton::compute(Board *board) {
 
 void SmithLife::compute(Board &board) {
     std::vector<std::vector<DiscreteAutomaton*>> grid = board.get_grid();
+    // easier access more local and less overhead
     for (int i = 0; i < board.get_height(); i++) {
         for (int j = 0; j < board.get_width(); j++) {
             DiscreteAutomaton *cell = dynamic_cast<DiscreteAutomaton*>(board.get_cell(i, j));
+            // getting the cell at each point of teh board
             if (cell) {
                 // game of life rules
                 int neighbors[8][2] = {
@@ -89,33 +91,38 @@ void SmithLife::compute(Board &board) {
                         {i+1, j-1},
                         {i+1, j},
                         {i+1, j+1}
-                };
+                }; // pre-defined neighbor coordinates
                 int count = 0;
                 for (int k = 0; k < 8; k++) {
                     int x = neighbors[k][0];
                     int y = neighbors[k][1];
-                    if (x >= 0 && x < board.get_width() && y >= 0 && y < board.get_height()) {
+                    if (x >= 0 && x < board.get_width() && y >= 0 && y < board.get_height()) { // verify is within bounds
+                        // get the neighbor if it exists
                         DiscreteAutomaton *neighbor = dynamic_cast<DiscreteAutomaton*>(board.get_cell(x, y));
-                        if (neighbor && neighbor->get_value() > cell->get_value()) {
+                        if (neighbor && neighbor->get_value() > 0) {
+                        // compare and see if values i greater than the current cell
                             count++;
                         }
                     }
                 }
                 if (cell->get_value() == 1) {
-                    if (count < 0 || count > 4) {
+                    if (count < 0 || count > 4) { // we see if we kill the cell
                         grid[i][j] = nullptr;
                     }
                 } else {
                     if (count == 3) {
-                        grid[i][j] = new SmithLife(i, j, 1);
+                        grid[i][j] = new SmithLife(i, j, 1); // we see if we create a new cell
                     }
                 }
             }
         }
     }
-    board.set_grid(grid);
+    board.set_grid(grid); // actually update teh board
 }
 
+
+
+// ======== BASIC LIFE ======== //
 
 BasicLife::BasicLife(int x, int y, double value) : x(x), y(y), value(value) {}
 int BasicLife::get_x() { return x; }

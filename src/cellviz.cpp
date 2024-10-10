@@ -45,9 +45,7 @@ int main(int argc, char *argv[]) {
 
     double sum = 0;
     double mean = 0;
-    for (const auto& price : prices) {
-        sum += price;
-    }
+    for (const auto& price : prices) sum += price; //
     mean = sum / count;
 
     int size = count / 2;
@@ -60,25 +58,28 @@ int main(int argc, char *argv[]) {
     int c = 0;
     for (int i = 0 ; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            SmithLife *cell = new SmithLife(i, j, prices[c] < mean ? 0 : 1);
-            board.add_cell(cell);
+            SmithLife *cell = new SmithLife(i, j, prices[c] < mean ? 0 : 1); // create a cell object
+            board.add_cell(cell); // add to the board..
             c+=1;
         }
     }
 
     while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) {
+        while (window.pollEvent(event)) { // so that we can exit the program
             if (event.type == sf::Event::Closed)
                 window.close();
         }
         try {
-            SmithLife::compute(board);
+            SmithLife::compute(board); // compute the board according to what we want to run
         } catch (exception &e) {
             cout << e.what() << endl;
         }
-        NewVisualizer(board, &window, 1);
+        NewVisualizer(board, &window, 1); /// re-render the board visualy
+        // board.render() for CLI rendering
         cout << "Rendering" << endl;
+        // now for timeouts
+        sf::sleep(sf::milliseconds(500));
     }
 
 }
