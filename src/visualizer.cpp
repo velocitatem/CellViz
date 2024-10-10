@@ -2,31 +2,51 @@
 #include "cellviz.h"
 #include "board.h"
 #include "cells.h"
+#include "visualizer.h"
 
-void NewVisualizer(Board &board, sf::RenderWindow *window, int cellSize) {
-    window->clear(sf::Color::Black);
 
-    int boardHeight = board.get_height();
-    int boardWidth = board.get_width();
+sf::Color Visualiser::CalculateCellColor(Board& board, int x, int y) {
+    sf::Color nullColor = sf::Color(0,0,0,0);
 
-    for (int x = 0; x < boardHeight; ++x) {
-        for (int y = 0; y < boardWidth; ++y) {
-            DiscreteAutomaton *cell = dynamic_cast<DiscreteAutomaton*>(board.get_cell(x, y));
-            if (!cell) continue;
+    DiscreteAutomaton *cell = dynamic_cast<DiscreteAutomaton*>(board.get_cell(x / cellSize, y / cellSize));
+    if (!cell) return nullColor;
 
-            double value = cell->get_value();
-            if (value <= 0) continue;
+    double value = cell->get_value();
+    if (value <= 0) return nullColor;
 
-            int colorIntensity = static_cast<int>(value * 255.0);
-            sf::Color color(0, colorIntensity * 0.5, colorIntensity);
+    double colorIntensity = min(1.0, value / maxCellValue);
+    return sf::Color(cellColor.r * colorIntensity, cellColor.g * colorIntensity, cellColor.b * colorIntensity, 255);
+}
 
-            sf::RectangleShape rectangle(sf::Vector2f(static_cast<float>(cellSize), static_cast<float>(cellSize)));
-            rectangle.setPosition(static_cast<float>(y * cellSize), static_cast<float>(x * cellSize));
+void Visualiser::UpdateBoard() {
+    window.clear(backgroundColor);
+
+    for (int x = 0; x < boardSize * cellSize; ++x) {
+        for (int y = 0; y < boardSize * cellSize; ++y) {
+            sf::Color color = CalculateCellColor(board, x, y);
+
+            if(color.a == 0) continue;
+
+            sf::RectangleShape rectangle(sf::Vector2f(cellSize, cellSize));
+            rectangle.setPosition(y * cellSize, x * cellSize);
+
+            //sf::Color(cellColor.r, cellColor.g, cellColor.b, 255);
             rectangle.setFillColor(color);
 
-            window->draw(rectangle);
+            window.draw(rectangle);
         }
     }
 
-    window->display();
+    window.display();
+}
+
+Visualiser::Visualiser(Board &board, int bSize, int cSize, int maxValue, sf::Color bCol, sf::Color cCol) :
+    window(sf::RenderWindow(sf::VideoMode(bSize * cSize, bSize * cSize), "Cellular automaton visualiser")),
+    board(board),
+    boardSize(bSize),
+    cellSize(cSize),
+    maxCellValue(maxValue),
+    backgroundColor(bCol),
+    cellColor(cCol) {
+    cout << "Creating window" << endl;
 }

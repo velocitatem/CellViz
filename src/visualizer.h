@@ -7,8 +7,22 @@
 #ifndef VISUALIZER_H
 #define VISUALIZER_H
 
-double GetValueFromBoard(Board &board, int x, int y);
-void UpdateWindow(Board &board, sf::RenderWindow &window, int size, bool print = false);
-void NewVisualizer(Board &board, sf::RenderWindow *window, int cellSize);
+class Visualiser{
+public:
+    Visualiser(Board &board, int bSize, int cSize, int maxValue, sf::Color bCol, sf::Color cCol);
+    void UpdateBoard();
+    sf::RenderWindow& GetWindow(){
+        return window;
+    }
+    sf::Color CalculateCellColor(Board& board, int x, int y);
+protected:
+    Board &board;
+    sf::RenderWindow window;
+    int boardSize;
+    int cellSize;
+    int maxCellValue;
+    sf::Color backgroundColor;
+    sf::Color cellColor;
+};
 
 #endif //VISUALIZER_H
