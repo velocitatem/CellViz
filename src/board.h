@@ -32,6 +32,8 @@ public:
     vector<ContinuousAutomaton*> get_continuous() const;
     vector<vector<DiscreteAutomaton*>> get_grid() const;
     int get_current_population();
+    int get_width();
+    int get_height();
     void render();
     // TODO: Add a move constructor, copy assignment operator, and move assignment operator.
 

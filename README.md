@@ -4,12 +4,17 @@ Cellular Automata (inspired by live-data) in order to visualize multidimensional
 ## Requirements
 
 + Boost dev libraries (not runtime)
++ JsonCpp dev libraries
++ Nlohmann Json dev libraries
++ CMake
++ SFML
++ Alpha Vantage API Key
 
 Standardized for Ubuntu:
 
 ```bash
 sudo apt update
-sudo apt-get install libboost-all-dev libjsoncpp-dev nlohmann-json-dev
+sudo apt-get install libboost-all-dev libjsoncpp-dev nlohmann-json3-dev libsfml-dev
 ```
 
 Alpha vantage key `export API_KEY=XXX`
