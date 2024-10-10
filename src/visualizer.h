@@ -3,6 +3,7 @@
 //
 
 #include <board.h>
+#include <SFML/Graphics.hpp>
 #ifndef VISUALIZER_H
 #define VISUALIZER_H
 

@@ -135,7 +135,7 @@ void BasicLife::compute(Board *board) {
     std::vector<std::vector<DiscreteAutomaton*>> grid = board->get_grid();
     for (int i = 0; i < board->get_height(); i++) {
         for (int j = 0; j < board->get_width(); j++) {
-            BasicLife *cell = static_cast<BasicLife*>(board->get_cell(i, j));
+            BasicLife *cell = dynamic_cast<BasicLife*>(board->get_cell(i, j));
             if (cell) {
                 double new_value = cell->get_value()+1;
                 cell = new BasicLife(i, j, new_value);

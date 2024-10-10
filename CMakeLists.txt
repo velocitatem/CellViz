@@ -13,7 +13,7 @@ add_executable(CellViz
         src/cells.cpp
         src/board.cpp
         src/data.cpp
-        src/visualiser.cpp
+        src/visualizer.cpp
         src/visualizer.h
 )
 
