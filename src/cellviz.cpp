@@ -17,12 +17,12 @@ using namespace std;
 using namespace std;
 int main(int argc, char *argv[])
 {
-
-
   int size = 1000;
-  sf::RenderWindow window = sf::RenderWindow(sf::VideoMode(size, size), "Cellular automaton visualiser");
   // nxn board of TYPE for SIZE
   Board board(size, size, GRID,size*size);
+
+  Visualiser visualiser(board, size);
+  sf::RenderWindow& window = visualiser.GetWindow();
 
   string species = "x";
   for (int i = 0 ; i < size; i++) {
@@ -42,12 +42,7 @@ int main(int argc, char *argv[])
 
       SmithLife::compute(board);
 
-
-      NewVisualizer(board, &window, 1);
+      visualiser.UpdateBoard();
       cout << "Rendering" << endl;
-
   }
-
-
 }
-
