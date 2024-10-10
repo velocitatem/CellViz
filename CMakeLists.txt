@@ -13,9 +13,11 @@ add_executable(CellViz
         src/cells.cpp
         src/board.cpp
         src/data.cpp
-        src/data.h
+        src/visualiser.cpp
+        src/visualizer.h
 )
 
+# Include directories (for header files)
 target_include_directories(CellViz PUBLIC ${PROJECT_SOURCE_DIR}/src)
 
 # libboost
@@ -23,8 +25,10 @@ find_package(Boost REQUIRED COMPONENTS system)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
+find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+include_directories(${SFML_INCLUDE_DIR})
+target_link_libraries(CellViz sfml-graphics sfml-window sfml-system curl jsoncpp pthread ${Boost_LIBRARIES})
 
-target_link_libraries(CellViz curl jsoncpp pthread ${Boost_LIBRARIES})
 
 add_executable(data src/fetch_intraday.cpp src/data.cpp src/data.h) # TODO: move to individual library
 target_link_libraries(data curl jsoncpp pthread ${Boost_LIBRARIES})

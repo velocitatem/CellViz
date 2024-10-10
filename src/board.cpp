@@ -73,8 +73,8 @@ vector<vector<DiscreteAutomaton*>> Board::get_grid() const {
     return grid;
 }
 
-void Board::set_grid(vector<vector<DiscreteAutomaton*>> &grid) {
-    this->grid = grid;
+void Board::set_grid(vector<vector<DiscreteAutomaton*>> &new_grid) {
+    grid = new_grid;
 }
 
 vector<ContinuousAutomaton*> Board::get_continuous() const {
@@ -83,6 +83,14 @@ vector<ContinuousAutomaton*> Board::get_continuous() const {
 
 void Board::set_continuum(vector<ContinuousAutomaton*> &continuous) {
     this->continuous = continuous;
+}
+
+int Board::get_width() {
+    return width;
+}
+
+int Board::get_height() {
+    return height;
 }
 
 
@@ -119,9 +127,10 @@ void Board::render () {
                 }
                 DiscreteAutomaton* cell = dynamic_cast<DiscreteAutomaton*>(c);
                 if (cell) {
-                    printf("%d ", static_cast<int>(cell->get_value()));
+                    //printf("%d ", static_cast<int>(cell->get_value()));
+                    cout << static_cast<int>(cell->get_value()) << " ";
                 } else {
-                    printf("0 ");
+                    cout << "0 ";
                 }
             }
             printf("\n");
