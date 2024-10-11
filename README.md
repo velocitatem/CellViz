@@ -1,8 +1,14 @@
-# CellViz
+<h1 style="text-align: center;">CellViz</h1>
 
 [![GitHub release](https://img.shields.io/github/v/release/velocitatem/CellViz)](https://github.com/velocitatem/CellViz/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://img.shields.io/github/actions/workflow/status/velocitatem/CellViz/build.yml)](https://github.com/velocitatem/CellViz/actions) [![Language: C++](https://img.shields.io/badge/language-C%2B%2B-%23f34b7d)](https://en.wikipedia.org/wiki/C%2B%2B) [![Platform: Ubuntu](https://img.shields.io/badge/platform-Ubuntu-orange)](https://ubuntu.com/)
 
 Cellular Automata inspired by live-data visualization, designed to handle multidimensional and high-throughput data efficiently.
+
+<div style="text-align: center;">
+  <img src="https://github.com/user-attachments/assets/5206dec2-d7c7-43cb-b913-4b2c32efb07d" alt="Output Image">
+</div>
+
+
 
 ## Authors
 ![Contributors](https://contrib.rocks/image?repo=velocitatem/CellViz)
