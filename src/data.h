@@ -16,10 +16,13 @@
 #include <cstdlib>
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s);
 void fetchDataWithRetry(const std::string& apikey,
-                        bool adjusted = true,
-                        bool extended_hours = true,
-                        const std::string& month = "",
-                        const std::string& outputsize = "compact",
-                        const std::string& datatype = "json",
-                        int maxRetries = 3);
+    bool adjusted = true,
+    bool extended_hours = true,
+    const std::string& month = "2024-09",
+    const std::string& outputsize = "compact",
+    const std::string& datatype = "json",
+    int maxRetries = 3,
+    const std::string& symbol = "AAPL");
+
+
 #endif //DATA_H

@@ -1,4 +1,6 @@
 #include "data.h"
+using json = nlohmann::json;
+using namespace std;
 
 int main(int argc, char* argv[])
 {
@@ -19,9 +21,10 @@ int main(int argc, char* argv[])
         std::string month = (argc > 3) ? argv[3] : "";
         std::string outputsize = (argc > 4) ? argv[4] : "compact";
         std::string datatype = (argc > 5) ? argv[5] : "json";
+        const char *stonk = "TSLA";
         
         // Use a lambda to start the thread
-        std::thread apiThread([=]() { fetchDataWithRetry(apikey, adjusted, extended_hours, month, outputsize, datatype); });
+        std::thread apiThread([=]() { fetchDataWithRetry(apikey, adjusted, extended_hours, month, outputsize, datatype, 3, stonk); });
         
         apiThread.join();
     } catch (const std::exception& e) {
@@ -29,6 +32,9 @@ int main(int argc, char* argv[])
     }
     // Clean up CURL
     curl_global_cleanup();
-    
+
+
+    // Read JSON file
+
     return 0;
 }

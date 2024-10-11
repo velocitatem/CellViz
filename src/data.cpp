@@ -8,11 +8,12 @@ size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s)
     s->append(reinterpret_cast<const char*>(contents), totalSize);
     return totalSize;
 }
-void fetchDataWithRetry(const std::string& apikey, bool adjusted, bool extended_hours, const std::string& month, const std::string& outputsize, const std::string& datatype, int maxRetries) {
+void fetchDataWithRetry(const std::string& apikey, bool adjusted, bool extended_hours, const std::string& month, const std::string& outputsize, const std::string& datatype, int maxRetries, const std::string& symbol) {
     CURL* curl;
     CURLcode res;
     std::string readBuffer;
-    std::string url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=IBM&interval=5min&apikey=" + apikey;
+
+    std::string url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+symbol+"&interval=5min&apikey=" + apikey;
     url += "&adjusted=" + std::string(adjusted ? "true" : "false");
     url += "&extended_hours=" + std::string(extended_hours ? "true" : "false");
     if (!month.empty()) {
@@ -50,7 +51,6 @@ void fetchDataWithRetry(const std::string& apikey, bool adjusted, bool extended_
             try {
                 auto jsonData = nlohmann::json::parse(readBuffer);
                 std::cout << "Metadata: " << jsonData["Meta Data"].dump(4) << std::endl;
-                // Save JSON data to a file
                 std::ofstream outFile("output.json");
                 if (outFile.is_open()) {
                     outFile << jsonData.dump(4);  // Pretty print JSON
@@ -68,3 +68,4 @@ void fetchDataWithRetry(const std::string& apikey, bool adjusted, bool extended_
         std::cerr << "Failed to initialize curl" << std::endl;
     }
 }
+
