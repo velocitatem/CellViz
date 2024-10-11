@@ -17,6 +17,16 @@ using json = nlohmann::json;
 
 using namespace std;
 
+void save_frame(const sf::RenderWindow &window, int frame_number) {
+    sf::Texture texture;
+    texture.create(window.getSize().x, window.getSize().y);
+    texture.update(window);
+    sf::Image screenshot = texture.copyToImage();
+
+    std::ostringstream filename;
+    filename << "frame_" << std::setw(5) << std::setfill('0') << frame_number << ".png";
+    screenshot.saveToFile(filename.str());
+}
 
 int main(int argc, char *argv[])
 {
@@ -55,7 +65,7 @@ int main(int argc, char *argv[])
 
 
     Board board(size, size, GRID,size*size);
-    Visualiser visualiser(board, size, 1, 1, sf::Color::Black, sf::Color::White);
+    Visualiser visualiser(board, size, 3, 1, sf::Color::Black, sf::Color::White);
     sf::RenderWindow& window = visualiser.GetWindow();
 
     string species = "x";
@@ -69,6 +79,7 @@ int main(int argc, char *argv[])
     }
     visualiser.UpdateBoard();
 
+    int frame = 0;
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) { // so that we can exit the program
@@ -83,9 +94,21 @@ int main(int argc, char *argv[])
 
         visualiser.UpdateBoard();
 
+        save_frame(window, frame++);
+
         // board.render() for CLI rendering
         cout << "Rendering" << endl;
         // now for timeouts
-        sf::sleep(sf::milliseconds(100));
+        //sf::sleep(sf::milliseconds(100));
     }
+
+    // check ffmpeg is installed
+    try {
+        system("ffmpeg -version");
+    } catch (exception &e) {
+        cout << "FFMPEG is not installed" << endl;
+        return 0;
+    }
+    system("ffmpeg -framerate 10 -i frame_%05d.png -c:v libx264 -pix_fmt yuv420p output.mp4");
+
 }
