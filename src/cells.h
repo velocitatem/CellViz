@@ -14,6 +14,7 @@ class Board;
 using namespace std;
 
 
+// this is our code abstraction for the cells
 class CellularAutomaton {
 public:
 protected:

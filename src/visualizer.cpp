@@ -5,7 +5,6 @@
 #include "visualizer.h"
 #include <math.h>
 
-
 Visualiser::Visualiser(Board &board, int bSize, int cSize, int maxValue, sf::Color bCol, sf::Color cCol) :
         window(sf::RenderWindow(sf::VideoMode(bSize * cSize, bSize * cSize), "Cellular automaton visualiser")),
         board(board),

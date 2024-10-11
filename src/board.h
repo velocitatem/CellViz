@@ -20,6 +20,7 @@ enum BoardType {
 
 class Board {
 public:
+    Board();
     Board(int width, int height, BoardType type, int population = 0);
     // copy constructor
     Board(const Board &board);

@@ -10,6 +10,7 @@
 
 using namespace std;
 
+Board::Board() : width(0), height(0), type(GRID), population(0), current_population(0) {}
 Board::Board(int width, int height, BoardType type, int population) :
     width(width), height(height), type(type), population(population), current_population(0) {
     if (type == GRID) {
