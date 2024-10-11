@@ -6,8 +6,8 @@ int main(int argc, char* argv[])
 {
     curl_global_init(CURL_GLOBAL_DEFAULT);
     try {
-        if (argc > 5) {
-            std::cerr << "Usage: " << argv[0] << " [adjusted] [extended_hours] [month] [outputsize] [datatype]" << std::endl;
+        if (argc > 6) {
+            std::cerr << "Usage: " << argv[0] << "[stonk] [adjusted] [extended_hours] [month] [outputsize] [datatype]" << std::endl;
             return 1;
         }
 
@@ -16,13 +16,13 @@ int main(int argc, char* argv[])
             throw std::runtime_error("API key not found in environment variables.");
         }
 
-        bool adjusted = (argc > 1) ? (std::string(argv[1]) == "true") : true;
-        bool extended_hours = (argc > 2) ? (std::string(argv[2]) == "true") : true;
-        std::string month = (argc > 3) ? argv[3] : "";
-        std::string outputsize = (argc > 4) ? argv[4] : "compact";
-        std::string datatype = (argc > 5) ? argv[5] : "json";
-        const char *stonk = "TSLA";
-        
+        const char *stonk = (argc > 1) ? argv[1] : "AAPL";
+        bool adjusted = (argc > 2) ? (std::string(argv[2]) == "true") : true;
+        bool extended_hours = (argc > 3) ? (std::string(argv[3]) == "true") : true;
+        std::string month = (argc > 4) ? argv[4] : "";
+        std::string outputsize = (argc > 5) ? argv[5] : "compact";
+        std::string datatype = (argc > 6) ? argv[6] : "json";
+
         // Use a lambda to start the thread
         std::thread apiThread([=]() { fetchDataWithRetry(apikey, adjusted, extended_hours, month, outputsize, datatype, 3, stonk); });
         
