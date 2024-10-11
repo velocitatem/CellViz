@@ -114,7 +114,7 @@ void SmithLife::compute(Board &board) {
                     }
                 }
                 if (cell->get_value() == 1) {
-                    if (count < 0 || count > 4) { // we see if we kill the cell
+                    if (count < 2 || count > 4) { // we see if we kill the cell
                         grid[i][j] = nullptr;
                     }
                 } else {
