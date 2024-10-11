@@ -1,16 +1,13 @@
 //
 // Created by velocitatem on 10/9/24.
 //
-
 #include "data.h"
-
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s)
 {
     size_t totalSize = size * nmemb;
     s->append(reinterpret_cast<const char*>(contents), totalSize);
     return totalSize;
 }
-
 void fetchDataWithRetry(const std::string& apikey, bool adjusted, bool extended_hours, const std::string& month, const std::string& outputsize, const std::string& datatype, int maxRetries, const std::string& symbol) {
     CURL* curl;
     CURLcode res;
@@ -19,17 +16,13 @@ void fetchDataWithRetry(const std::string& apikey, bool adjusted, bool extended_
     std::string url = "https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol="+symbol+"&interval=5min&apikey=" + apikey;
     url += "&adjusted=" + std::string(adjusted ? "true" : "false");
     url += "&extended_hours=" + std::string(extended_hours ? "true" : "false");
-
     if (!month.empty()) {
         url += "&month=" + month;
     }
-
     url += "&outputsize=" + outputsize;
     url += "&datatype=" + datatype;
-
     int retries = 0;
     bool success = false;
-
     curl = curl_easy_init();
     if (curl != nullptr) {
         do {
@@ -38,9 +31,7 @@ void fetchDataWithRetry(const std::string& apikey, bool adjusted, bool extended_
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
             curl_easy_setopt(curl, CURLOPT_SSL_VERIFYPEER, 1L);
             curl_easy_setopt(curl, CURLOPT_SSL_VERIFYHOST, 2L);
-
             res = curl_easy_perform(curl);
-
             if (res == CURLE_OK) {
                 success = true;
                 break;
@@ -53,7 +44,6 @@ void fetchDataWithRetry(const std::string& apikey, bool adjusted, bool extended_
                 }
             }
         } while (retries < maxRetries);
-
         if (!success) {
             std::cerr << "All retry attempts failed." << std::endl;
         } else {
@@ -73,7 +63,6 @@ void fetchDataWithRetry(const std::string& apikey, bool adjusted, bool extended_
                 std::cerr << "JSON error: " << e.what() << std::endl;
             }
         }
-
         curl_easy_cleanup(curl);
     } else {
         std::cerr << "Failed to initialize curl" << std::endl;

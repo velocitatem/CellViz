@@ -42,7 +42,13 @@ add_executable(runTests
         tests/tests.cpp
         src/cells.cpp
         src/board.cpp
-        src/cells.h src/board.h)
+        src/cells.h
+        src/board.h
+        src/data.cpp
+        src/data.h
+        src/visualizer.cpp
+        src/visualizer.h
+)
 
 target_link_libraries(runTests GTest::GTest GTest::Main pthread)
 target_include_directories(runTests PUBLIC ${PROJECT_SOURCE_DIR}/src)

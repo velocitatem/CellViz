@@ -1,10 +1,8 @@
 //
 // Created by velocitatem on 10/9/24.
 //
-
 #ifndef DATA_H
 #define DATA_H
-
 #include <iostream>
 #include <string>
 #include <curl/curl.h>
@@ -16,7 +14,6 @@
 #include <regex>
 #include <boost/algorithm/string.hpp>
 #include <cstdlib>
-
 size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* s);
 void fetchDataWithRetry(const std::string& apikey,
     bool adjusted = true,
