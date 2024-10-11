@@ -35,9 +35,7 @@ public:
     void set_x(int x);
     void set_y(int y);
     void set_value(double value);
-    bool operator==(const DiscreteAutomaton &cell) const {
-        return x == cell.x && y == cell.y && value == cell.value;
-    }
+    bool operator==(const DiscreteAutomaton &cell) const;
 private:
     int x, y;
     double value;

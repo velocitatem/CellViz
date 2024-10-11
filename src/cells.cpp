@@ -30,7 +30,11 @@ DiscreteAutomaton::DiscreteAutomaton(const DiscreteAutomaton &cell) {
 void DiscreteAutomaton::set_x(int x) { x = x; }
 void DiscreteAutomaton::set_y(int y) { y = y; }
 void DiscreteAutomaton::set_value(double value) { value = value; }
-
+// == op
+bool DiscreteAutomaton::operator==(const DiscreteAutomaton &cell) const {
+    const double EPSILON = 1e-9;
+    return x == cell.x && y == cell.y && std::abs(value - cell.value) < EPSILON;
+}
 
 SmithLife::SmithLife(int x, int y, double value) : x(x), y(y), value(value) {}
 int SmithLife::get_x() { return x; }
