@@ -44,10 +44,6 @@ add_executable(runTests
         src/board.cpp
         src/cells.h
         src/board.h
-        src/data.cpp
-        src/data.h
-        src/visualizer.cpp
-        src/visualizer.h
 )
 
 target_link_libraries(runTests GTest::GTest GTest::Main pthread)

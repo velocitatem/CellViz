@@ -6,7 +6,6 @@
 #include <gtest/gtest.h>
 #include <board.h>
 #include <cells.h>
-#include <data.h>
 
 TEST(test1, test1) {
     // A test to test tests
@@ -85,6 +84,12 @@ TEST(DiscreteAutomatonTest, Compare) {
     SmithLife cell(0, 0, 1.0);
     SmithLife cell2(0, 0, 1.0);
     EXPECT_EQ(cell, cell2);
+}
+
+
+TEST(BoardConstructorTest, Constructor) {
+    Board b;
+    EXPECT_EQ(b.get_current_population(), 0);
 }
 
 
