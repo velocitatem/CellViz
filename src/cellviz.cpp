@@ -5,6 +5,7 @@
 #include <iostream>
 #include  <stdio.h>
 #include  <stdlib.h>
+#include <random>
 #include <vector>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
@@ -43,7 +44,7 @@ int main(int argc, char *argv[])
         count += 4;
     }
 
-    random_shuffle(prices.begin(), prices.end());
+    shuffle(prices.begin(), prices.end(), std::mt19937(std::random_device()())); // suggested by inteligence
 
     double sum = 0;
     double mean = 0;

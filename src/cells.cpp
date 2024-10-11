@@ -8,6 +8,7 @@
 
 using json = nlohmann::json;
 
+ParticleLife::ParticleLife() : x(0), y(0), species("") { }
 ParticleLife::ParticleLife(int x, int y, string species) : x(x), y(y), species(species) { }
 Board ParticleLife::compute(Board *board) {
     map<string, ContinuousAutomaton> cellular_automaton;
@@ -19,6 +20,13 @@ Board ParticleLife::compute(Board *board) {
     return *board;
 }
 
+DiscreteAutomaton::DiscreteAutomaton() : x(0), y(0), value(0) { }
+DiscreteAutomaton::DiscreteAutomaton(int x, int y, double value) : x(x), y(y), value(value) { }
+DiscreteAutomaton::DiscreteAutomaton(const DiscreteAutomaton &cell) {
+    x = cell.x;
+    y = cell.y;
+    value = cell.value;
+}
 void DiscreteAutomaton::set_x(int x) { x = x; }
 void DiscreteAutomaton::set_y(int y) { y = y; }
 void DiscreteAutomaton::set_value(double value) { value = value; }

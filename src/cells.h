@@ -25,12 +25,18 @@ public:
 
 class DiscreteAutomaton : public CellularAutomaton {
 public:
+    DiscreteAutomaton();
+    DiscreteAutomaton(int x, int y, double value);
+    DiscreteAutomaton(const DiscreteAutomaton &cell);
     virtual double get_value() = 0;
     virtual int get_x() = 0;
     virtual int get_y() = 0;
     void set_x(int x);
     void set_y(int y);
     void set_value(double value);
+    bool operator==(const DiscreteAutomaton &cell) const {
+        return x == cell.x && y == cell.y && value == cell.value;
+    }
 private:
     int x, y;
     double value;
@@ -46,6 +52,8 @@ public:
 
 class ParticleLife : public ContinuousAutomaton {
 public:
+    // 3 main constructors
+    ParticleLife();
     ParticleLife(int x, int y, string species); //TODO: Color
     // copy
     ParticleLife(const ParticleLife &cell) {
