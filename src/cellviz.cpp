@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
   // nxn board of TYPE for SIZE
   Board board(size, size, GRID,size*size);
 
-  Visualiser visualiser(board, size);
+  Visualiser visualiser(board, size, 1, 1, sf::Color::Black, sf::Color::White);
   sf::RenderWindow& window = visualiser.GetWindow();
 
   string species = "x";
