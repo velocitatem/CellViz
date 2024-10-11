@@ -95,8 +95,6 @@ int Board::get_height() {
 }
 
 
-
-
 int Board::get_current_population() {
     return current_population;
 }

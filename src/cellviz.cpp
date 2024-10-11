@@ -1,6 +1,7 @@
 //
 // Created by velocitatem on 9/27/24.
 //
+#include <complex>
 #include <fstream>
 #include <iostream>
 #include  <stdio.h>
@@ -31,8 +32,27 @@ void save_frame(const sf::RenderWindow &window, int frame_number) {
 int main(int argc, char *argv[])
 {
 
+    // CLI SECTION:
+    /// help message
+    /// arguments:
+    //  - json_file (string) - the json file to read from
+    /// - output.mp4 (string) - the output file to write to (if not specified does nto write to file)
+    /// - life=(smith|basic) - the type of life to use
+    if (argc < 2) {
+        cout << "Usage: " << argv[0] << " <json_file> [output.mp4] [life=(smith|basic)]" << endl;
+        return 1;
+    }
+
+    // chekc json file
+    string json_file_path = argv[1];
+    if (json_file_path.find(".json") == string::npos) {
+        cout << "Invalid JSON file" << endl;
+        return 1;
+    }
+
+
     // Read JSON file
-    std::ifstream json_file("output.json");
+    std::ifstream json_file(json_file_path);
     json j;
     json_file >> j;
 
@@ -54,7 +74,7 @@ int main(int argc, char *argv[])
         count += 4;
     }
 
-    shuffle(prices.begin(), prices.end(), std::mt19937(std::random_device()())); // suggested by inteligence
+    //shuffle(prices.begin(), prices.end(), std::mt19937(std::random_device()())); // suggested by inteligence
 
     double sum = 0;
     double mean = 0;
@@ -102,13 +122,22 @@ int main(int argc, char *argv[])
         //sf::sleep(sf::milliseconds(100));
     }
 
-    // check ffmpeg is installed
+    if (argc < 3) {
+        return 0;
+    }
+    // check if output file is specified
+    string output_file = argv[2];
+    if (output_file.find(".mp4") == string::npos) {
+        cout << "Invalid output file" << endl;
+        return 1;
+    }
+
     try {
         system("ffmpeg -version");
     } catch (exception &e) {
         cout << "FFMPEG is not installed" << endl;
         return 0;
     }
-    system("ffmpeg -framerate 10 -i frame_%05d.png -c:v libx264 -pix_fmt yuv420p output.mp4");
+    system(("ffmpeg -framerate 10 -i frame_%05d.png -c:v libx264 -pix_fmt yuv420p " + output_file).c_str());
 
 }
