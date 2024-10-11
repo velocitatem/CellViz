@@ -5,6 +5,8 @@
 
 #include <gtest/gtest.h>
 #include <board.h>
+#include <cells.h>
+#include <data.h>
 
 TEST(test1, test1) {
     // A test to test tests
@@ -78,6 +80,12 @@ TEST(BoardTest, AddCell2) {
     EXPECT_EQ(cell4->get_value(), 8.0);
 }
 
+// compare 2 cells
+TEST(DiscreteAutomatonTest, Compare) {
+    SmithLife cell(0, 0, 1.0);
+    SmithLife cell2(0, 0, 1.0);
+    EXPECT_EQ(cell, cell2);
+}
 
 
 int main(int argc, char **argv) {
