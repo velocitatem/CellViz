@@ -36,6 +36,7 @@ jobs:
           for pkg in \
             "cmake" \
             "g++" \
+            "lcov" \
             "libboost-all-dev" \
             "libsfml-dev" \
             "libgtest-dev" \
