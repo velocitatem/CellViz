@@ -7,6 +7,10 @@ on:
   pull_request:
     branches:
       - "*"
+permissions:
+  contents: read
+  checks: write
+
 
 jobs:
   build:
@@ -15,6 +19,15 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+
+      - name: Cache APT packages
+        uses: actions/cache@v3
+        with:
+          path: /var/cache/apt/archives
+          key: ${{ runner.os }}-apt-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-apt-
+
 
       - name: Install dependencies (CMake)
         run: |
