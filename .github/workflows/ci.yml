@@ -25,7 +25,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake ..
+          cmake -Wno-dev ..
           make
 
       - name: Run tests
