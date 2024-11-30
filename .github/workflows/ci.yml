@@ -39,7 +39,13 @@ jobs:
           make
 
       - name: Run tests
-        run: ./build/runTests
+        run: ./build/runTests --gtest_output="xml:test-results.xml"
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: "test-results.xml"
 
       - name: 'Upload Artifact'
         if: success()
