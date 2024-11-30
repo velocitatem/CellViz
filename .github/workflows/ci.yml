@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies (CMake)
         run: |
           sudo apt-get update
-          sudo apt-get install cmake g++
+          sudo apt-get install cmake g++ libboost-all-dev
 
       - name: Build the project
         run: |
