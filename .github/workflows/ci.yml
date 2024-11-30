@@ -19,21 +19,33 @@ jobs:
       - name: Install dependencies (CMake)
         run: |
           sudo apt-get update
-          sudo apt-get install cmake g++ libboost-all-dev libsfml-dev libgtest-dev nlohmann-json3-dev libcurl4-openssl-dev libjsoncpp-dev
+          for pkg in \
+            cmake \
+            g++ \
+            libboost-all-dev \
+            libsfml-dev \
+            libgtest-dev \
+            nlohmann-json3-dev \
+            libcurl4-openssl-dev \
+            libjsoncpp-dev \
+          ; do sudo apt-get install -y $pkg || exit 1
+          ; done
 
       - name: Build the project
         run: |
           mkdir build
           cd build
-          cmake -Wno-dev ..
+          cmake  ..
           make
 
       - name: Run tests
         run: ./build/runTests
 
       - name: 'Upload Artifact'
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: CellViz
           path: ./build/CellViz
           retention-days: 5
+          continue-on-error: true
