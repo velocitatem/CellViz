@@ -7,9 +7,10 @@ on:
   pull_request:
     branches:
       - "*"
+
 permissions:
-  contents: read
   checks: write
+  pull-requests: write
 
 
 jobs:
@@ -59,6 +60,7 @@ jobs:
         if: always()
         with:
           files: "test-results.xml"
+        continue-on-error: true
 
       - name: 'Upload Artifact'
         if: success()
