@@ -20,16 +20,16 @@ jobs:
         run: |
           sudo apt-get update
           for pkg in \
-            cmake \
-            g++ \
-            libboost-all-dev \
-            libsfml-dev \
-            libgtest-dev \
-            nlohmann-json3-dev \
-            libcurl4-openssl-dev \
-            libjsoncpp-dev \
-          ; do sudo apt-get install -y $pkg || exit 1
-          ; done
+            "cmake" \
+            "g++" \
+            "libboost-all-dev" \
+            "libsfml-dev" \
+            "libgtest-dev" \
+            "nlohmann-json3-dev" \
+            "libcurl4-openssl-dev" \
+            "libjsoncpp-dev"; do
+            sudo apt-get install -y $pkg || exit 1
+          done
 
       - name: Build the project
         run: |
