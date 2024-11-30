@@ -30,3 +30,10 @@ jobs:
 
       - name: Run tests
         run: ./build/runTests
+
+      - name: 'Upload Artifact'
+        uses: actions/upload-artifact@v4
+        with:
+          name: CellViz
+          path: ./build/CellViz
+          retention-days: 5
