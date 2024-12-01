@@ -138,6 +138,9 @@ int main(int argc, char *argv[])
         cout << "FFMPEG is not installed" << endl;
         return 0;
     }
-    system(("ffmpeg -framerate 10 -i frame_%05d.png -c:v libx264 -pix_fmt yuv420p " + output_file).c_str());
+    //system(("ffmpeg -framerate 10 -i frame_%05d.png -c:v libx264 -pix_fmt yuv420p " + output_file).c_str());
+
+    return 0;
+
 
 }

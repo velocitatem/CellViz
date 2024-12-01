@@ -85,8 +85,10 @@ private:
 class SmithLife : public DiscreteAutomaton {
 public:
     SmithLife(int x, int y, double value);
+    ~SmithLife();
     int get_x(); int get_y();
     double get_value();
+    void set_value(double value);
     static void compute(Board &board);
 private:
     int x, y;

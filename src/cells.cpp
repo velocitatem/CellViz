@@ -29,7 +29,7 @@ DiscreteAutomaton::DiscreteAutomaton(const DiscreteAutomaton &cell) {
 }
 void DiscreteAutomaton::set_x(int x) { x = x; }
 void DiscreteAutomaton::set_y(int y) { y = y; }
-void DiscreteAutomaton::set_value(double value) { value = value; }
+void DiscreteAutomaton::set_value(double value) { this->value = value; }
 // == op
 bool DiscreteAutomaton::operator==(const DiscreteAutomaton &cell) const {
     const double EPSILON = 1e-9;
@@ -40,6 +40,12 @@ SmithLife::SmithLife(int x, int y, double value) : x(x), y(y), value(value) {}
 int SmithLife::get_x() { return x; }
 int SmithLife::get_y() { return y; }
 double SmithLife::get_value() { return value; }
+void SmithLife::set_value(double value) {
+    this->value = value;
+}
+
+
+SmithLife::~SmithLife() {}
 
 void CellularAutomaton::compute(Board *board) {
     vector<vector<DiscreteAutomaton*>> grid = board->get_grid();
@@ -118,12 +124,16 @@ void SmithLife::compute(Board &board) {
                     }
                 }
                 if (cell->get_value() == 1) {
-                    if (count < 2 || count > 4) { // we see if we kill the cell
-                        grid[i][j] = nullptr;
+                    if (count < 2 || count > 3) { // we see if we kill the cell
+                        auto pointer_to_cell = grid[i][j];
+                        auto smith_life = dynamic_cast<SmithLife*>(pointer_to_cell);
+                        smith_life->set_value(0);
                     }
                 } else {
                     if (count == 3) {
-                        grid[i][j] = new SmithLife(i, j, 1); // we see if we create a new cell
+                        auto pointer_to_cell = grid[i][j];
+                        auto smith_life = dynamic_cast<SmithLife*>(pointer_to_cell);
+                        smith_life->set_value(1);
                     }
                 }
             }
