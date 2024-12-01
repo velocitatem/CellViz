@@ -35,6 +35,26 @@ Board::Board(const Board &board) {
     }
 }
 
+Board Board::operator=(const Board &board) {
+    if (this == &board) {
+        return *this;
+    }
+    width = board.width;
+    height = board.height;
+    type = board.type;
+    population = board.population;
+    current_population = board.current_population;
+    if (type == GRID) {
+        grid = board.grid;
+    }
+    else if (type == CONTINUOUS) {
+        continuous = board.continuous;
+    }
+    cout << "Board assignment operator called" << endl;
+    return *this;
+}
+
+
 
 
 Board::~Board() {
@@ -70,7 +90,7 @@ void Board::add_cell(CellularAutomaton *cell) {
 }
 
 
-vector<vector<DiscreteAutomaton*>> Board::get_grid() const {
+vector<vector<DiscreteAutomaton*>> Board::get_grid() {
     return grid;
 }
 
@@ -78,7 +98,7 @@ void Board::set_grid(vector<vector<DiscreteAutomaton*>> &new_grid) {
     grid = new_grid;
 }
 
-vector<ContinuousAutomaton*> Board::get_continuous() const {
+vector<ContinuousAutomaton*> Board::get_continuous() {
     return continuous;
 }
 

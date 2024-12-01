@@ -92,6 +92,51 @@ TEST(BoardConstructorTest, Constructor) {
     EXPECT_EQ(b.get_current_population(), 0);
 }
 
+// test value assignment
+TEST(DiscreteAutomatonTest, Value) {
+    SmithLife cell(0, 0, 1.0);
+    EXPECT_EQ(cell.get_value(), 1.0);
+    cell.set_value(2.0);
+    EXPECT_EQ(cell.get_value(), 2.0);
+}
+
+
+TEST(SmithLifeTest, Compute) { // testing with a single cell that will die
+    Board board(2, 2, GRID, 2);
+    SmithLife *cell = new SmithLife(0, 0, 1.0);
+    board.add_cell(cell);
+    SmithLife::compute(board);
+    DiscreteAutomaton *cell2 = dynamic_cast<DiscreteAutomaton*>(board.get_cell(0, 0));
+    EXPECT_EQ(cell2->get_value(), 0.0);
+    board.add_cell(new SmithLife(0, 1, 1.0));
+    board.add_cell(new SmithLife(1, 1, 1.0));
+    board.add_cell(new SmithLife(1, 0, 1.0));
+    /// we give new neighbors to the cell and it comes back to life
+    SmithLife::compute(board);
+    DiscreteAutomaton *cell3 = dynamic_cast<DiscreteAutomaton*>(board.get_cell(0, 0));
+    EXPECT_EQ(cell3->get_value(), 1.0);
+}
+
+
+TEST(BoardInitializerTest, Initializer) {
+    Board board(5, 5, GRID, 3);
+    EXPECT_EQ(board.get_width(), 5);
+    EXPECT_EQ(board.get_height(), 5);
+    EXPECT_EQ(board.get_current_population(), 0);
+}
+
+
+TEST(BoardCopyConstructorTest, CopyConstructor) {
+    Board board(5, 5, GRID, 3);
+    SmithLife *cell = new SmithLife(0, 0, 1.0);
+    board.add_cell(cell);
+    Board *board1 = new Board(board);
+    EXPECT_EQ(board1->get_current_population(), 1);
+    DiscreteAutomaton *cell2 = dynamic_cast<DiscreteAutomaton*>(board1->get_cell(0, 0));
+    EXPECT_EQ(cell2->get_value(), 1.0);
+}
+
+
 
 int main(int argc, char **argv) {
     ::testing::InitGoogleTest(&argc, argv);
