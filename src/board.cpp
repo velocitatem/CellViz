@@ -116,6 +116,14 @@ int Board::get_height() {
 
 
 int Board::get_current_population() {
+    int current_population = 0;
+    for (auto &row : grid) {
+        for (auto &cell : row) {
+            if (cell->get_value() > 0) {
+                current_population++;
+            }
+        }
+    }
     return current_population;
 }
 
