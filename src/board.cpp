@@ -119,7 +119,7 @@ int Board::get_current_population() {
     int current_population = 0;
     for (auto &row : grid) {
         for (auto &cell : row) {
-            if (cell->get_value() > 0) {
+            if (cell && cell->get_value() > 0) {
                 current_population++;
             }
         }
