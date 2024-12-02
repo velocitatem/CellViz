@@ -7,6 +7,7 @@
 #include <board.h>
 #include <cells.h>
 
+
 TEST(test1, test1) {
     // A test to test tests
     EXPECT_EQ(1, 1);
