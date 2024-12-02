@@ -26,7 +26,7 @@ jobs:
           vcpkg install boost:x64-windows sfml:x64-windows nlohmann-json:x64-windows curl:x64-windows jsoncpp:x64-windows gtk:x64-windows || exit 1
 
       - name: Set up CMake
-        uses: lukka/get-cmake@v4
+        uses: lukka/get-cmake
         with:
           cmake-version: '3.22.0'
 
