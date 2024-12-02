@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['installation_20on_20ubuntu_0',['Installation on Ubuntu',['../md__r_e_a_d_m_e.html#autotoc_md2',1,'']]]
+  ['features_0',['Features',['../index.html#features_sec',1,'']]],
+  ['fetch_5fintraday_2ecpp_1',['fetch_intraday.cpp',['../fetch__intraday_8cpp.html',1,'']]],
+  ['fetchdatawithretry_2',['fetchDataWithRetry',['../data_8cpp.html#a1cdebb40a9f49200fcf9b50a12c8e7fa',1,'fetchDataWithRetry(const std::string &amp;apikey, bool adjusted, bool extended_hours, const std::string &amp;month, const std::string &amp;outputsize, const std::string &amp;datatype, int maxRetries, const std::string &amp;symbol):&#160;data.cpp'],['../data_8h.html#aaf608b43545063934336838f795a98f9',1,'fetchDataWithRetry(const std::string &amp;apikey, bool adjusted=true, bool extended_hours=true, const std::string &amp;month=&quot;2024-09&quot;, const std::string &amp;outputsize=&quot;compact&quot;, const std::string &amp;datatype=&quot;json&quot;, int maxRetries=3, const std::string &amp;symbol=&quot;AAPL&quot;):&#160;data.cpp']]]
 ];

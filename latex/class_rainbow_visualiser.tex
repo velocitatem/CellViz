@@ -1,0 +1,90 @@
+\doxysection{Rainbow\+Visualiser Class Reference}
+\hypertarget{class_rainbow_visualiser}{}\label{class_rainbow_visualiser}\index{RainbowVisualiser@{RainbowVisualiser}}
+
+
+{\ttfamily \#include $<$visualizer.\+h$>$}
+
+Inheritance diagram for Rainbow\+Visualiser\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_rainbow_visualiser}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_rainbow_visualiser_a8ff23407e0c4ccad05c8abb003ffc832}{Rainbow\+Visualiser}} (\mbox{\hyperlink{class_board}{Board}} \&\mbox{\hyperlink{class_visualiser_aba475e0f10475d63f922cbf69bf25c6d}{board}}, int b\+Size, int c\+Size, int max\+Value, sf\+::\+Color b\+Col, sf\+::\+Color c\+Col, int speed)
+\item 
+void \mbox{\hyperlink{class_rainbow_visualiser_a04f8f5b6080729b0b7d0a725317d8931}{Update\+Board}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_visualiser}{Visualiser}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_visualiser_a9c5584fbd8f70548a6694e3a89c60538}{Visualiser}} ()
+\item 
+\mbox{\hyperlink{class_visualiser_a537af1a1f2dca78ebaf4088480852020}{Visualiser}} (\mbox{\hyperlink{class_board}{Board}} \&\mbox{\hyperlink{class_visualiser_aba475e0f10475d63f922cbf69bf25c6d}{board}}, int b\+Size, int c\+Size, int max\+Value, sf\+::\+Color b\+Col, sf\+::\+Color c\+Col)
+\item 
+sf\+::\+Render\+Window \& \mbox{\hyperlink{class_visualiser_addf014a046d62c8ee56872c2d78edb14}{Get\+Window}} ()
+\item 
+sf\+::\+Color \mbox{\hyperlink{class_visualiser_a73626efaf7b7762c1e60bdebefba38b5}{Calculate\+Cell\+Color}} (\mbox{\hyperlink{class_board}{Board}} \&\mbox{\hyperlink{class_visualiser_aba475e0f10475d63f922cbf69bf25c6d}{board}}, int x, int y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_rainbow_visualiser_a8f423bf32fec67aeffbbacbd0a5b8018}{cycle\+Speed}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_visualiser}{Visualiser}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_board}{Board}} \& \mbox{\hyperlink{class_visualiser_aba475e0f10475d63f922cbf69bf25c6d}{board}}
+\item 
+sf\+::\+Render\+Window \mbox{\hyperlink{class_visualiser_a37f9401c9ed805c393f5f90defab19f4}{window}}
+\item 
+int \mbox{\hyperlink{class_visualiser_a84b5548645c9fe416dfb9a5b71ceea17}{board\+Size}}
+\item 
+int \mbox{\hyperlink{class_visualiser_af47fdabd13cbbdf5e414653e12669478}{cell\+Size}}
+\item 
+int \mbox{\hyperlink{class_visualiser_a1b3883b961078735990082dc0dd86533}{max\+Cell\+Value}}
+\item 
+sf\+::\+Color \mbox{\hyperlink{class_visualiser_ab65f0160ddf71bbadc0c62ccb46e8313}{background\+Color}}
+\item 
+sf\+::\+Color \mbox{\hyperlink{class_visualiser_ae818e529c04d6c31fa529c9396d1c02c}{cell\+Color}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_rainbow_visualiser_a8ff23407e0c4ccad05c8abb003ffc832}\index{RainbowVisualiser@{RainbowVisualiser}!RainbowVisualiser@{RainbowVisualiser}}
+\index{RainbowVisualiser@{RainbowVisualiser}!RainbowVisualiser@{RainbowVisualiser}}
+\doxysubsubsection{\texorpdfstring{RainbowVisualiser()}{RainbowVisualiser()}}
+{\footnotesize\ttfamily \label{class_rainbow_visualiser_a8ff23407e0c4ccad05c8abb003ffc832} 
+Rainbow\+Visualiser\+::\+Rainbow\+Visualiser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_board}{Board}} \&}]{board}{, }\item[{int}]{b\+Size}{, }\item[{int}]{c\+Size}{, }\item[{int}]{max\+Value}{, }\item[{sf\+::\+Color}]{b\+Col}{, }\item[{sf\+::\+Color}]{c\+Col}{, }\item[{int}]{speed}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_rainbow_visualiser_a04f8f5b6080729b0b7d0a725317d8931}\index{RainbowVisualiser@{RainbowVisualiser}!UpdateBoard@{UpdateBoard}}
+\index{UpdateBoard@{UpdateBoard}!RainbowVisualiser@{RainbowVisualiser}}
+\doxysubsubsection{\texorpdfstring{UpdateBoard()}{UpdateBoard()}}
+{\footnotesize\ttfamily \label{class_rainbow_visualiser_a04f8f5b6080729b0b7d0a725317d8931} 
+void Rainbow\+Visualiser\+::\+Update\+Board (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_visualiser_a5542ea4f03c868bb26e6e1fa467a26a7}{Visualiser}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_rainbow_visualiser_a8f423bf32fec67aeffbbacbd0a5b8018}\index{RainbowVisualiser@{RainbowVisualiser}!cycleSpeed@{cycleSpeed}}
+\index{cycleSpeed@{cycleSpeed}!RainbowVisualiser@{RainbowVisualiser}}
+\doxysubsubsection{\texorpdfstring{cycleSpeed}{cycleSpeed}}
+{\footnotesize\ttfamily \label{class_rainbow_visualiser_a8f423bf32fec67aeffbbacbd0a5b8018} 
+int Rainbow\+Visualiser\+::cycle\+Speed\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{visualizer_8h}{visualizer.\+h}}\item 
+src/\mbox{\hyperlink{visualizer_8cpp}{visualizer.\+cpp}}\end{DoxyCompactItemize}

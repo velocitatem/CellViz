@@ -1,0 +1,133 @@
+\doxysection{Visualiser Class Reference}
+\hypertarget{class_visualiser}{}\label{class_visualiser}\index{Visualiser@{Visualiser}}
+
+
+{\ttfamily \#include $<$visualizer.\+h$>$}
+
+Inheritance diagram for Visualiser\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_visualiser}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_visualiser_a9c5584fbd8f70548a6694e3a89c60538}{Visualiser}} ()
+\item 
+\mbox{\hyperlink{class_visualiser_a537af1a1f2dca78ebaf4088480852020}{Visualiser}} (\mbox{\hyperlink{class_board}{Board}} \&\mbox{\hyperlink{class_visualiser_aba475e0f10475d63f922cbf69bf25c6d}{board}}, int b\+Size, int c\+Size, int max\+Value, sf\+::\+Color b\+Col, sf\+::\+Color c\+Col)
+\item 
+virtual void \mbox{\hyperlink{class_visualiser_a5542ea4f03c868bb26e6e1fa467a26a7}{Update\+Board}} ()
+\item 
+sf\+::\+Render\+Window \& \mbox{\hyperlink{class_visualiser_addf014a046d62c8ee56872c2d78edb14}{Get\+Window}} ()
+\item 
+sf\+::\+Color \mbox{\hyperlink{class_visualiser_a73626efaf7b7762c1e60bdebefba38b5}{Calculate\+Cell\+Color}} (\mbox{\hyperlink{class_board}{Board}} \&\mbox{\hyperlink{class_visualiser_aba475e0f10475d63f922cbf69bf25c6d}{board}}, int x, int y)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_board}{Board}} \& \mbox{\hyperlink{class_visualiser_aba475e0f10475d63f922cbf69bf25c6d}{board}}
+\item 
+sf\+::\+Render\+Window \mbox{\hyperlink{class_visualiser_a37f9401c9ed805c393f5f90defab19f4}{window}}
+\item 
+int \mbox{\hyperlink{class_visualiser_a84b5548645c9fe416dfb9a5b71ceea17}{board\+Size}}
+\item 
+int \mbox{\hyperlink{class_visualiser_af47fdabd13cbbdf5e414653e12669478}{cell\+Size}}
+\item 
+int \mbox{\hyperlink{class_visualiser_a1b3883b961078735990082dc0dd86533}{max\+Cell\+Value}}
+\item 
+sf\+::\+Color \mbox{\hyperlink{class_visualiser_ab65f0160ddf71bbadc0c62ccb46e8313}{background\+Color}}
+\item 
+sf\+::\+Color \mbox{\hyperlink{class_visualiser_ae818e529c04d6c31fa529c9396d1c02c}{cell\+Color}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_visualiser_a9c5584fbd8f70548a6694e3a89c60538}\index{Visualiser@{Visualiser}!Visualiser@{Visualiser}}
+\index{Visualiser@{Visualiser}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{Visualiser()}{Visualiser()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{class_visualiser_a9c5584fbd8f70548a6694e3a89c60538} 
+Visualiser\+::\+Visualiser (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_visualiser_a537af1a1f2dca78ebaf4088480852020}\index{Visualiser@{Visualiser}!Visualiser@{Visualiser}}
+\index{Visualiser@{Visualiser}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{Visualiser()}{Visualiser()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{class_visualiser_a537af1a1f2dca78ebaf4088480852020} 
+Visualiser\+::\+Visualiser (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_board}{Board}} \&}]{board}{, }\item[{int}]{b\+Size}{, }\item[{int}]{c\+Size}{, }\item[{int}]{max\+Value}{, }\item[{sf\+::\+Color}]{b\+Col}{, }\item[{sf\+::\+Color}]{c\+Col}{}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_visualiser_a73626efaf7b7762c1e60bdebefba38b5}\index{Visualiser@{Visualiser}!CalculateCellColor@{CalculateCellColor}}
+\index{CalculateCellColor@{CalculateCellColor}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{CalculateCellColor()}{CalculateCellColor()}}
+{\footnotesize\ttfamily \label{class_visualiser_a73626efaf7b7762c1e60bdebefba38b5} 
+sf\+::\+Color Visualiser\+::\+Calculate\+Cell\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_board}{Board}} \&}]{board}{, }\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+\Hypertarget{class_visualiser_addf014a046d62c8ee56872c2d78edb14}\index{Visualiser@{Visualiser}!GetWindow@{GetWindow}}
+\index{GetWindow@{GetWindow}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{GetWindow()}{GetWindow()}}
+{\footnotesize\ttfamily \label{class_visualiser_addf014a046d62c8ee56872c2d78edb14} 
+sf\+::\+Render\+Window \& Visualiser\+::\+Get\+Window (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{class_visualiser_a5542ea4f03c868bb26e6e1fa467a26a7}\index{Visualiser@{Visualiser}!UpdateBoard@{UpdateBoard}}
+\index{UpdateBoard@{UpdateBoard}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{UpdateBoard()}{UpdateBoard()}}
+{\footnotesize\ttfamily \label{class_visualiser_a5542ea4f03c868bb26e6e1fa467a26a7} 
+void Visualiser\+::\+Update\+Board (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_rainbow_visualiser_a04f8f5b6080729b0b7d0a725317d8931}{Rainbow\+Visualiser}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_visualiser_ab65f0160ddf71bbadc0c62ccb46e8313}\index{Visualiser@{Visualiser}!backgroundColor@{backgroundColor}}
+\index{backgroundColor@{backgroundColor}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{backgroundColor}{backgroundColor}}
+{\footnotesize\ttfamily \label{class_visualiser_ab65f0160ddf71bbadc0c62ccb46e8313} 
+sf\+::\+Color Visualiser\+::background\+Color\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_visualiser_aba475e0f10475d63f922cbf69bf25c6d}\index{Visualiser@{Visualiser}!board@{board}}
+\index{board@{board}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{board}{board}}
+{\footnotesize\ttfamily \label{class_visualiser_aba475e0f10475d63f922cbf69bf25c6d} 
+\mbox{\hyperlink{class_board}{Board}}\& Visualiser\+::board\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_visualiser_a84b5548645c9fe416dfb9a5b71ceea17}\index{Visualiser@{Visualiser}!boardSize@{boardSize}}
+\index{boardSize@{boardSize}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{boardSize}{boardSize}}
+{\footnotesize\ttfamily \label{class_visualiser_a84b5548645c9fe416dfb9a5b71ceea17} 
+int Visualiser\+::board\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_visualiser_ae818e529c04d6c31fa529c9396d1c02c}\index{Visualiser@{Visualiser}!cellColor@{cellColor}}
+\index{cellColor@{cellColor}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{cellColor}{cellColor}}
+{\footnotesize\ttfamily \label{class_visualiser_ae818e529c04d6c31fa529c9396d1c02c} 
+sf\+::\+Color Visualiser\+::cell\+Color\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_visualiser_af47fdabd13cbbdf5e414653e12669478}\index{Visualiser@{Visualiser}!cellSize@{cellSize}}
+\index{cellSize@{cellSize}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{cellSize}{cellSize}}
+{\footnotesize\ttfamily \label{class_visualiser_af47fdabd13cbbdf5e414653e12669478} 
+int Visualiser\+::cell\+Size\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_visualiser_a1b3883b961078735990082dc0dd86533}\index{Visualiser@{Visualiser}!maxCellValue@{maxCellValue}}
+\index{maxCellValue@{maxCellValue}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{maxCellValue}{maxCellValue}}
+{\footnotesize\ttfamily \label{class_visualiser_a1b3883b961078735990082dc0dd86533} 
+int Visualiser\+::max\+Cell\+Value\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_visualiser_a37f9401c9ed805c393f5f90defab19f4}\index{Visualiser@{Visualiser}!window@{window}}
+\index{window@{window}!Visualiser@{Visualiser}}
+\doxysubsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily \label{class_visualiser_a37f9401c9ed805c393f5f90defab19f4} 
+sf\+::\+Render\+Window Visualiser\+::window\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{visualizer_8h}{visualizer.\+h}}\item 
+src/\mbox{\hyperlink{visualizer_8cpp}{visualizer.\+cpp}}\end{DoxyCompactItemize}

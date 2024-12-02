@@ -1,0 +1,238 @@
+\doxysection{Discrete\+Automaton Class Reference}
+\hypertarget{class_discrete_automaton}{}\label{class_discrete_automaton}\index{DiscreteAutomaton@{DiscreteAutomaton}}
+
+
+Represents a type of cellular automaton called \doxylink{class_discrete_automaton}{Discrete\+Automaton}.  
+
+
+
+
+{\ttfamily \#include $<$cells.\+h$>$}
+
+Inheritance diagram for Discrete\+Automaton\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_discrete_automaton}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_discrete_automaton_af059599862ade3fca2592834f3c0a90f}{Discrete\+Automaton}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor for \doxylink{class_discrete_automaton}{Discrete\+Automaton}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_discrete_automaton_a13e21aeaa07140895558c41c242accd3}{Discrete\+Automaton}} (int \mbox{\hyperlink{class_discrete_automaton_a22095bfb5f334c9fe95041363b9072a5}{x}}, int \mbox{\hyperlink{class_discrete_automaton_ab0ae1e88c1d9eba0686cbbff8fed3ecf}{y}}, double \mbox{\hyperlink{class_discrete_automaton_aa544088426e4e02058d78d1133687aa5}{value}})
+\begin{DoxyCompactList}\small\item\em Parameterized constructor for \doxylink{class_discrete_automaton}{Discrete\+Automaton}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{class_discrete_automaton_a5eb173bbf6ed7e20894ca6ce1f3cec22}{Discrete\+Automaton}} (const \mbox{\hyperlink{class_discrete_automaton}{Discrete\+Automaton}} \&cell)
+\begin{DoxyCompactList}\small\item\em Copy constructor for \doxylink{class_discrete_automaton}{Discrete\+Automaton}. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{class_discrete_automaton_af8c81df2c1c6d64b123be2264ec2d7c5}{get\+\_\+value}} ()=0
+\item 
+virtual int \mbox{\hyperlink{class_discrete_automaton_a8b7e419c108a0d16c312f1adeae2cbc9}{get\+\_\+x}} ()=0
+\item 
+virtual int \mbox{\hyperlink{class_discrete_automaton_abf2e207ee3da9e17d9895865030881ea}{get\+\_\+y}} ()=0
+\item 
+void \mbox{\hyperlink{class_discrete_automaton_aa617e531b9fdf5298b0f1dedda1b83da}{set\+\_\+x}} (int \mbox{\hyperlink{class_discrete_automaton_a22095bfb5f334c9fe95041363b9072a5}{x}})
+\begin{DoxyCompactList}\small\item\em Sets the x-\/coordinate of the \doxylink{class_discrete_automaton}{Discrete\+Automaton}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_discrete_automaton_a8288788c35f9e886670c1fd9fb84cdac}{set\+\_\+y}} (int \mbox{\hyperlink{class_discrete_automaton_ab0ae1e88c1d9eba0686cbbff8fed3ecf}{y}})
+\begin{DoxyCompactList}\small\item\em Sets the y-\/coordinate of the \doxylink{class_discrete_automaton}{Discrete\+Automaton}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_discrete_automaton_a6e14c7b239408d959405bef3e92ffe80}{set\+\_\+value}} (double \mbox{\hyperlink{class_discrete_automaton_aa544088426e4e02058d78d1133687aa5}{value}})
+\begin{DoxyCompactList}\small\item\em Sets the value of the \doxylink{class_discrete_automaton}{Discrete\+Automaton}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_discrete_automaton_ab30e4dcdefadaf5d70dcb23b25a55d3c}{operator==}} (const \mbox{\hyperlink{class_discrete_automaton}{Discrete\+Automaton}} \&cell) const
+\begin{DoxyCompactList}\small\item\em Equality operator for \doxylink{class_discrete_automaton}{Discrete\+Automaton}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_cellular_automaton}{Cellular\+Automaton}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{class_cellular_automaton_ae3839b1e441e2653c4216bc86c65d990}{\texorpdfstring{$\sim$}{\string~}\+Cellular\+Automaton}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{class_discrete_automaton_a22095bfb5f334c9fe95041363b9072a5}{x}}
+\item 
+int \mbox{\hyperlink{class_discrete_automaton_ab0ae1e88c1d9eba0686cbbff8fed3ecf}{y}}
+\item 
+double \mbox{\hyperlink{class_discrete_automaton_aa544088426e4e02058d78d1133687aa5}{value}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_cellular_automaton}{Cellular\+Automaton}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_cellular_automaton_a1306ad0b891bfd2895501f809cf3d256}{Cellular\+Automaton}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{class_cellular_automaton}{Cellular\+Automaton}}}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_cellular_automaton_a716115d837e498b985c2f7dc4ff0bc6a}{compute}} (\mbox{\hyperlink{class_board}{Board}} \texorpdfstring{$\ast$}{*}board)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a type of cellular automaton called \doxylink{class_discrete_automaton}{Discrete\+Automaton}. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_discrete_automaton_af059599862ade3fca2592834f3c0a90f}\index{DiscreteAutomaton@{DiscreteAutomaton}!DiscreteAutomaton@{DiscreteAutomaton}}
+\index{DiscreteAutomaton@{DiscreteAutomaton}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{DiscreteAutomaton()}{DiscreteAutomaton()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_af059599862ade3fca2592834f3c0a90f} 
+Discrete\+Automaton\+::\+Discrete\+Automaton (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor for \doxylink{class_discrete_automaton}{Discrete\+Automaton}. 
+
+\Hypertarget{class_discrete_automaton_a13e21aeaa07140895558c41c242accd3}\index{DiscreteAutomaton@{DiscreteAutomaton}!DiscreteAutomaton@{DiscreteAutomaton}}
+\index{DiscreteAutomaton@{DiscreteAutomaton}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{DiscreteAutomaton()}{DiscreteAutomaton()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_a13e21aeaa07140895558c41c242accd3} 
+Discrete\+Automaton\+::\+Discrete\+Automaton (\begin{DoxyParamCaption}\item[{int}]{x}{, }\item[{int}]{y}{, }\item[{double}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Parameterized constructor for \doxylink{class_discrete_automaton}{Discrete\+Automaton}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The x-\/coordinate of the cell. \\
+\hline
+{\em y} & The y-\/coordinate of the cell. \\
+\hline
+{\em value} & The value of the cell. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_discrete_automaton_a5eb173bbf6ed7e20894ca6ce1f3cec22}\index{DiscreteAutomaton@{DiscreteAutomaton}!DiscreteAutomaton@{DiscreteAutomaton}}
+\index{DiscreteAutomaton@{DiscreteAutomaton}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{DiscreteAutomaton()}{DiscreteAutomaton()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_a5eb173bbf6ed7e20894ca6ce1f3cec22} 
+Discrete\+Automaton\+::\+Discrete\+Automaton (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_discrete_automaton}{Discrete\+Automaton}} \&}]{cell}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor for \doxylink{class_discrete_automaton}{Discrete\+Automaton}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & The \doxylink{class_discrete_automaton}{Discrete\+Automaton} object to copy. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_discrete_automaton_af8c81df2c1c6d64b123be2264ec2d7c5}\index{DiscreteAutomaton@{DiscreteAutomaton}!get\_value@{get\_value}}
+\index{get\_value@{get\_value}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{get\_value()}{get\_value()}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_af8c81df2c1c6d64b123be2264ec2d7c5} 
+virtual double Discrete\+Automaton\+::get\+\_\+value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_basic_life_a06095c4b15497342311d0160ac5be050}{Basic\+Life}}, and \mbox{\hyperlink{class_smith_life_aad4e825019ffbda262b18b8d4f66f4fa}{Smith\+Life}}.
+
+\Hypertarget{class_discrete_automaton_a8b7e419c108a0d16c312f1adeae2cbc9}\index{DiscreteAutomaton@{DiscreteAutomaton}!get\_x@{get\_x}}
+\index{get\_x@{get\_x}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{get\_x()}{get\_x()}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_a8b7e419c108a0d16c312f1adeae2cbc9} 
+virtual int Discrete\+Automaton\+::get\+\_\+x (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_basic_life_a4d053e5bed441f27a0714865af1ec824}{Basic\+Life}}, and \mbox{\hyperlink{class_smith_life_afd38c0dcf7e4ad919850e093814b2806}{Smith\+Life}}.
+
+\Hypertarget{class_discrete_automaton_abf2e207ee3da9e17d9895865030881ea}\index{DiscreteAutomaton@{DiscreteAutomaton}!get\_y@{get\_y}}
+\index{get\_y@{get\_y}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{get\_y()}{get\_y()}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_abf2e207ee3da9e17d9895865030881ea} 
+virtual int Discrete\+Automaton\+::get\+\_\+y (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_basic_life_a7a6c97a1d62216c00495f428d604fcb4}{Basic\+Life}}, and \mbox{\hyperlink{class_smith_life_aecf12b3079184fc2531f46761dd6c6cb}{Smith\+Life}}.
+
+\Hypertarget{class_discrete_automaton_ab30e4dcdefadaf5d70dcb23b25a55d3c}\index{DiscreteAutomaton@{DiscreteAutomaton}!operator==@{operator==}}
+\index{operator==@{operator==}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_ab30e4dcdefadaf5d70dcb23b25a55d3c} 
+bool Discrete\+Automaton\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_discrete_automaton}{Discrete\+Automaton}} \&}]{cell}{}\end{DoxyParamCaption}) const}
+
+
+
+Equality operator for \doxylink{class_discrete_automaton}{Discrete\+Automaton}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cell} & The \doxylink{class_discrete_automaton}{Discrete\+Automaton} to compare. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if both cells are equal, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{class_discrete_automaton_a6e14c7b239408d959405bef3e92ffe80}\index{DiscreteAutomaton@{DiscreteAutomaton}!set\_value@{set\_value}}
+\index{set\_value@{set\_value}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{set\_value()}{set\_value()}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_a6e14c7b239408d959405bef3e92ffe80} 
+void Discrete\+Automaton\+::set\+\_\+value (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Sets the value of the \doxylink{class_discrete_automaton}{Discrete\+Automaton}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The new value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_discrete_automaton_aa617e531b9fdf5298b0f1dedda1b83da}\index{DiscreteAutomaton@{DiscreteAutomaton}!set\_x@{set\_x}}
+\index{set\_x@{set\_x}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{set\_x()}{set\_x()}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_aa617e531b9fdf5298b0f1dedda1b83da} 
+void Discrete\+Automaton\+::set\+\_\+x (\begin{DoxyParamCaption}\item[{int}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Sets the x-\/coordinate of the \doxylink{class_discrete_automaton}{Discrete\+Automaton}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The new x-\/coordinate. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_discrete_automaton_a8288788c35f9e886670c1fd9fb84cdac}\index{DiscreteAutomaton@{DiscreteAutomaton}!set\_y@{set\_y}}
+\index{set\_y@{set\_y}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{set\_y()}{set\_y()}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_a8288788c35f9e886670c1fd9fb84cdac} 
+void Discrete\+Automaton\+::set\+\_\+y (\begin{DoxyParamCaption}\item[{int}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Sets the y-\/coordinate of the \doxylink{class_discrete_automaton}{Discrete\+Automaton}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & The new y-\/coordinate. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_discrete_automaton_aa544088426e4e02058d78d1133687aa5}\index{DiscreteAutomaton@{DiscreteAutomaton}!value@{value}}
+\index{value@{value}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_aa544088426e4e02058d78d1133687aa5} 
+double Discrete\+Automaton\+::value\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_discrete_automaton_a22095bfb5f334c9fe95041363b9072a5}\index{DiscreteAutomaton@{DiscreteAutomaton}!x@{x}}
+\index{x@{x}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_a22095bfb5f334c9fe95041363b9072a5} 
+int Discrete\+Automaton\+::x\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{class_discrete_automaton_ab0ae1e88c1d9eba0686cbbff8fed3ecf}\index{DiscreteAutomaton@{DiscreteAutomaton}!y@{y}}
+\index{y@{y}!DiscreteAutomaton@{DiscreteAutomaton}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily \label{class_discrete_automaton_ab0ae1e88c1d9eba0686cbbff8fed3ecf} 
+int Discrete\+Automaton\+::y\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\mbox{\hyperlink{cells_8h}{cells.\+h}}\item 
+src/\mbox{\hyperlink{cells_8cpp}{cells.\+cpp}}\end{DoxyCompactItemize}

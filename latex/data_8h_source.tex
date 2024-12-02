@@ -1,0 +1,34 @@
+\doxysection{data.\+h}
+\hypertarget{data_8h_source}{}\label{data_8h_source}\index{src/data.h@{src/data.h}}
+\mbox{\hyperlink{data_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ Created\ by\ velocitatem\ on\ 10/9/24.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#ifndef\ DATA\_H}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#define\ DATA\_H}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <curl/curl.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <nlohmann/json.hpp>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <regex>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <boost/algorithm/string.hpp>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00017\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{data_8h_a5cc5d063f4f2d30bb4ba27757a15d45e}{WriteCallback}}(\textcolor{keywordtype}{void}*\ contents,\ \textcolor{keywordtype}{size\_t}\ size,\ \textcolor{keywordtype}{size\_t}\ nmemb,\ std::string*\ s);}
+\DoxyCodeLine{00018\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{data_8h_aaf608b43545063934336838f795a98f9}{fetchDataWithRetry}}(\textcolor{keyword}{const}\ std::string\&\ apikey,}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{bool}\ adjusted\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{bool}\ extended\_hours\ =\ \textcolor{keyword}{true},}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ month\ =\ \textcolor{stringliteral}{"{}2024-\/09"{}},}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ outputsize\ =\ \textcolor{stringliteral}{"{}compact"{}},}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ datatype\ =\ \textcolor{stringliteral}{"{}json"{}},}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{int}\ maxRetries\ =\ 3,}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ symbol\ =\ \textcolor{stringliteral}{"{}AAPL"{}});}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#endif\ }\textcolor{comment}{//DATA\_H}}
+
+\end{DoxyCode}

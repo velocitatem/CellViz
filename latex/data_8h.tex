@@ -1,0 +1,35 @@
+\doxysection{src/data.h File Reference}
+\hypertarget{data_8h}{}\label{data_8h}\index{src/data.h@{src/data.h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$curl/curl.\+h$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$nlohmann/json.\+hpp$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$regex$>$}\newline
+{\ttfamily \#include $<$boost/algorithm/string.\+hpp$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{data_8h_a5cc5d063f4f2d30bb4ba27757a15d45e}{Write\+Callback}} (void \texorpdfstring{$\ast$}{*}contents, size\+\_\+t size, size\+\_\+t nmemb, std\+::string \texorpdfstring{$\ast$}{*}s)
+\item 
+void \mbox{\hyperlink{data_8h_aaf608b43545063934336838f795a98f9}{fetch\+Data\+With\+Retry}} (const std\+::string \&apikey, bool adjusted=true, bool extended\+\_\+hours=true, const std\+::string \&month="{}2024-\/09"{}, const std\+::string \&outputsize="{}compact"{}, const std\+::string \&datatype="{}json"{}, int max\+Retries=3, const std\+::string \&symbol="{}AAPL"{})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{data_8h_aaf608b43545063934336838f795a98f9}\index{data.h@{data.h}!fetchDataWithRetry@{fetchDataWithRetry}}
+\index{fetchDataWithRetry@{fetchDataWithRetry}!data.h@{data.h}}
+\doxysubsubsection{\texorpdfstring{fetchDataWithRetry()}{fetchDataWithRetry()}}
+{\footnotesize\ttfamily \label{data_8h_aaf608b43545063934336838f795a98f9} 
+void fetch\+Data\+With\+Retry (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{apikey}{, }\item[{bool}]{adjusted}{ = {\ttfamily true}, }\item[{bool}]{extended\+\_\+hours}{ = {\ttfamily true}, }\item[{const std\+::string \&}]{month}{ = {\ttfamily "{}2024-\/09"{}}, }\item[{const std\+::string \&}]{outputsize}{ = {\ttfamily "{}compact"{}}, }\item[{const std\+::string \&}]{datatype}{ = {\ttfamily "{}json"{}}, }\item[{int}]{max\+Retries}{ = {\ttfamily 3}, }\item[{const std\+::string \&}]{symbol}{ = {\ttfamily "{}AAPL"{}}}\end{DoxyParamCaption})}
+
+\Hypertarget{data_8h_a5cc5d063f4f2d30bb4ba27757a15d45e}\index{data.h@{data.h}!WriteCallback@{WriteCallback}}
+\index{WriteCallback@{WriteCallback}!data.h@{data.h}}
+\doxysubsubsection{\texorpdfstring{WriteCallback()}{WriteCallback()}}
+{\footnotesize\ttfamily \label{data_8h_a5cc5d063f4f2d30bb4ba27757a15d45e} 
+size\+\_\+t Write\+Callback (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{contents}{, }\item[{size\+\_\+t}]{size}{, }\item[{size\+\_\+t}]{nmemb}{, }\item[{std\+::string \texorpdfstring{$\ast$}{*}}]{s}{}\end{DoxyParamCaption})}
+

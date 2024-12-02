@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['readme_0',['README',['../md__r_e_a_d_m_e.html',1,'']]]
+  ['cellviz_20project_20documentation_0',['CellViz Project Documentation',['../index.html',1,'']]]
 ];

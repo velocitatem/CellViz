@@ -1,0 +1,43 @@
+\doxysection{src/cellviz.cpp File Reference}
+\hypertarget{cellviz_8cpp}{}\label{cellviz_8cpp}\index{src/cellviz.cpp@{src/cellviz.cpp}}
+{\ttfamily \#include $<$complex$>$}\newline
+{\ttfamily \#include $<$fstream$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$random$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$SFML/\+Graphics/\+Render\+Window.\+hpp$>$}\newline
+{\ttfamily \#include $<$SFML/\+Window/\+Event.\+hpp$>$}\newline
+{\ttfamily \#include "{}visualizer.\+h"{}}\newline
+{\ttfamily \#include "{}board.\+h"{}}\newline
+{\ttfamily \#include "{}cells.\+h"{}}\newline
+{\ttfamily \#include $<$gtk/gtk.\+h$>$}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{cellviz_8cpp_a6368733251eb5e1d0510cf63e62c1cb8}{save\+\_\+frame}} (const sf\+::\+Render\+Window \&window, int frame\+\_\+number)
+\item 
+int \mbox{\hyperlink{cellviz_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{cellviz_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\index{cellviz.cpp@{cellviz.cpp}!main@{main}}
+\index{main@{main}!cellviz.cpp@{cellviz.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{cellviz_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+help message arguments\+:
+
+
+\begin{DoxyItemize}
+\item output.\+mp4 (string) -\/ the output file to write to (if not specified does nto write to file)
+\item life=(smith\texorpdfstring{$\vert$}{|}basic) -\/ the type of life to use
+\end{DoxyItemize}\Hypertarget{cellviz_8cpp_a6368733251eb5e1d0510cf63e62c1cb8}\index{cellviz.cpp@{cellviz.cpp}!save\_frame@{save\_frame}}
+\index{save\_frame@{save\_frame}!cellviz.cpp@{cellviz.cpp}}
+\doxysubsubsection{\texorpdfstring{save\_frame()}{save\_frame()}}
+{\footnotesize\ttfamily \label{cellviz_8cpp_a6368733251eb5e1d0510cf63e62c1cb8} 
+void save\+\_\+frame (\begin{DoxyParamCaption}\item[{const sf\+::\+Render\+Window \&}]{window}{, }\item[{int}]{frame\+\_\+number}{}\end{DoxyParamCaption})}
+
