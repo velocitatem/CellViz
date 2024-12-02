@@ -12,7 +12,6 @@ permissions:
   checks: write
   pull-requests: write
 
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -29,8 +28,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-apt-
 
-
-      - name: Install dependencies (CMake)
+      - name: Install dependencies (CMake and Doxygen)
         run: |
           sudo apt-get update
           for pkg in \
@@ -43,7 +41,9 @@ jobs:
             "nlohmann-json3-dev" \
             "libcurl4-openssl-dev" \
             "libgtk-3-dev" \
-            "libjsoncpp-dev"; do
+            "libjsoncpp-dev" \
+            "doxygen" \
+            "graphviz"; do
             sudo apt-get install -y $pkg || exit 1
           done
 
@@ -51,7 +51,8 @@ jobs:
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage" ..
+          # Adding CMAKE_PREFIX_PATH to help CMake locate JsonCpp
+          cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage" -DCMAKE_PREFIX_PATH="/usr/lib/x86_64-linux-gnu/cmake/jsoncpp" ..
           make
 
       - name: Run tests
@@ -79,6 +80,21 @@ jobs:
         with:
           files: "test-results.xml"
         continue-on-error: true
+
+      - name: Compile and Publish Doxygen Documentation
+        run: |
+          mkdir docs
+          doxygen Doxyfile
+          mv html docs/
+        env:
+          CI: true
+
+      - name: Deploy Documentation to GitHub Pages
+        if: success()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./docs/html
 
       - name: 'Upload Artifact'
         if: success()
