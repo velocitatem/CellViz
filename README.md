@@ -27,8 +27,7 @@ To build and run CellViz, you will need:
 ### Installation on Ubuntu
 
 ```bash
-sudo apt update
-sudo apt-get install libboost-all-dev libjsoncpp-dev nlohmann-json3-dev libsfml-dev
+sudo apt-get update && sudo apt-get install -y cmake g++ lcov libboost-all-dev libsfml-dev libgtest-dev nlohmann-json3-dev libcurl4-openssl-dev libgtk-3-dev libjsoncpp-dev
 ```
 
 To use the Alpha Vantage API key, set the environment variable:
