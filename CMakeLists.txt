@@ -7,8 +7,8 @@ project(CellViz CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Set the CMake prefix path for dependencies
-set(CMAKE_PREFIX_PATH "/usr/lib/cmake/jsoncpp" ${CMAKE_PREFIX_PATH})
+# Set CMake policy to handle Boost deprecation
+cmake_policy(SET CMP0167 NEW)
 
 # Find required packages
 find_package(JsonCpp REQUIRED)
