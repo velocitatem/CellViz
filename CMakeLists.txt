@@ -43,12 +43,32 @@ message(STATUS "GTK3_LDFLAGS: ${GTK3_LDFLAGS}")
 separate_arguments(GTK3_LDFLAGS_LIST UNIX_COMMAND "${GTK3_LDFLAGS}")
 
 # Link libraries
+# Removed duplicate link to JsonCpp and fixed linking order
+find_library(JSONCPP_LIB jsoncpp HINTS /opt/homebrew/lib)
+find_path(JSONCPP_INCLUDE_DIR json/json.h HINTS /opt/homebrew/include)
+
+if(NOT JSONCPP_LIB)
+    message(FATAL_ERROR "JsonCpp library not found")
+endif()
+
+if(NOT JSONCPP_INCLUDE_DIR)
+    message(FATAL_ERROR "JsonCpp include directory not found")
+endif()
+
+# Find nlohmann/json
+find_path(NLOHMANN_JSON_INCLUDE_DIR nlohmann/json.hpp HINTS /opt/homebrew/include)
+
+if(NOT NLOHMANN_JSON_INCLUDE_DIR)
+    message(FATAL_ERROR "nlohmann/json.hpp not found")
+endif()
+
+target_include_directories(CellViz PUBLIC ${JSONCPP_INCLUDE_DIR} ${NLOHMANN_JSON_INCLUDE_DIR})
 target_link_libraries(CellViz
     ${GTK3_LDFLAGS_LIST}
     ${Boost_LIBRARIES}
     sfml-graphics sfml-window sfml-system
-    JsonCpp::JsonCpp
-    ${CURL_LIBRARIES}
+    ${JSONCPP_LIB}
+    CURL::libcurl
     "-framework Cocoa"
     "-framework Carbon"
     "-framework CoreGraphics"
@@ -58,24 +78,8 @@ target_link_libraries(CellViz
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 target_include_directories(CellViz PUBLIC ${SFML_INCLUDE_DIR})
 
-# Find JsonCpp
-find_package(JsonCpp REQUIRED)
-
-
 # Find CURL
 find_package(CURL REQUIRED)
-
-# Link libraries for CellViz, including CURL
-target_link_libraries(CellViz
-    ${GTK3_LDFLAGS_LIST}
-    ${Boost_LIBRARIES}
-    sfml-graphics sfml-window sfml-system
-    JsonCpp::JsonCpp
-    CURL::libcurl
-    "-framework Cocoa"
-    "-framework Carbon"
-    "-framework CoreGraphics"
-)
 
 # Data fetching executable
 add_executable(data
@@ -85,7 +89,7 @@ add_executable(data
 )
 target_link_libraries(data
     CURL::libcurl
-    JsonCpp::JsonCpp
+    ${JSONCPP_LIB}
     pthread
     ${Boost_LIBRARIES}
 )
@@ -100,7 +104,8 @@ add_executable(runTests
     src/board.h
 )
 
-target_include_directories(runTests PUBLIC ${PROJECT_SOURCE_DIR}/src ${GTEST_INCLUDE_DIRS})
+# Include nlohmann/json for tests
+target_include_directories(runTests PUBLIC ${PROJECT_SOURCE_DIR}/src ${GTEST_INCLUDE_DIRS} ${NLOHMANN_JSON_INCLUDE_DIR})
 target_link_libraries(runTests GTest::GTest GTest::Main pthread)
 
 # Enable testing
