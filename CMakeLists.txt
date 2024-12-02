@@ -48,18 +48,33 @@ find_library(JSONCPP_LIB jsoncpp HINTS /opt/homebrew/lib /usr/local/lib /usr/lib
 find_path(JSONCPP_INCLUDE_DIR json/json.h HINTS /opt/homebrew/include /usr/local/include /usr/include /opt/homebrew/opt/jsoncpp/include)
 
 if(NOT JSONCPP_LIB)
-    message(FATAL_ERROR "JsonCpp library not found")
+    message(WARNING "JsonCpp library not found, attempting to install via Homebrew...")
+    execute_process(COMMAND brew install jsoncpp)
+    find_library(JSONCPP_LIB jsoncpp HINTS /opt/homebrew/lib /usr/local/lib /usr/lib /opt/homebrew/opt/jsoncpp/lib)
+    if(NOT JSONCPP_LIB)
+        message(FATAL_ERROR "JsonCpp library not found after installation attempt")
+    endif()
 endif()
 
 if(NOT JSONCPP_INCLUDE_DIR)
-    message(FATAL_ERROR "JsonCpp include directory not found")
+    message(WARNING "JsonCpp include directory not found, attempting to install via Homebrew...")
+    execute_process(COMMAND brew install jsoncpp)
+    find_path(JSONCPP_INCLUDE_DIR json/json.h HINTS /opt/homebrew/include /usr/local/include /usr/include /opt/homebrew/opt/jsoncpp/include)
+    if(NOT JSONCPP_INCLUDE_DIR)
+        message(FATAL_ERROR "JsonCpp include directory not found after installation attempt")
+    endif()
 endif()
 
 # Find nlohmann/json
 find_path(NLOHMANN_JSON_INCLUDE_DIR nlohmann/json.hpp HINTS /opt/homebrew/include /usr/local/include /usr/include /opt/homebrew/opt/nlohmann-json/include)
 
 if(NOT NLOHMANN_JSON_INCLUDE_DIR)
-    message(FATAL_ERROR "nlohmann/json.hpp not found")
+    message(WARNING "nlohmann/json.hpp not found, attempting to install via Homebrew...")
+    execute_process(COMMAND brew install nlohmann-json)
+    find_path(NLOHMANN_JSON_INCLUDE_DIR nlohmann/json.hpp HINTS /opt/homebrew/include /usr/local/include /usr/include /opt/homebrew/opt/nlohmann-json/include)
+    if(NOT NLOHMANN_JSON_INCLUDE_DIR)
+        message(FATAL_ERROR "nlohmann/json.hpp not found after installation attempt")
+    endif()
 endif()
 
 target_include_directories(CellViz PUBLIC ${JSONCPP_INCLUDE_DIR} ${NLOHMANN_JSON_INCLUDE_DIR})
