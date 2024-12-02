@@ -6,12 +6,13 @@ project(CellViz CXX)
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_PREFIX_PATH "/opt/homebrew/Cellar/jsoncpp/1.9.6")
 
 # Set CMake policy to handle Boost deprecation
 cmake_policy(SET CMP0167 NEW)
 
 # Find required packages
-find_package(JsonCpp REQUIRED)
+find_package(JsonCpp REQUIRED HINTS "/opt/homebrew/Cellar/jsoncpp/1.9.6/lib/cmake/jsoncpp")
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(PkgConfig REQUIRED)
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
@@ -40,7 +41,6 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${GTK_INCLUDE_DIRS}
     ${SFML_INCLUDE_DIR}
-    ${JSONCPP_INCLUDE_DIRS}
     ${NLOHMANN_JSON_INCLUDE_DIR}
 )
 
