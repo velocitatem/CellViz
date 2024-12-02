@@ -1,16 +1,50 @@
-cmake_minimum_required(VERSION 3.10)
+cmake_minimum_required(VERSION 3.20)
 
 # Set the project name
-project(CellViz)
+project(CellViz CXX)
 
 # Specify the C++ standard
 set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Include directories for source files
-include_directories(${PROJECT_SOURCE_DIR}/src)
+# Find required packages
+find_package(Boost REQUIRED COMPONENTS system)
+find_package(PkgConfig REQUIRED)
+find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
+find_package(CURL REQUIRED)
+find_package(GTest REQUIRED)
 
-# Main executable for CellViz
+# PKG-CONFIG for GTK
+pkg_check_modules(GTK REQUIRED gtk+-3.0)
+
+# JsonCpp and nlohmann/json
+find_package(JsonCpp REQUIRED)
+find_path(NLOHMANN_JSON_INCLUDE_DIR nlohmann/json.hpp 
+    HINTS 
+    /opt/homebrew/include 
+    /usr/local/include 
+    /usr/include 
+    /opt/homebrew/opt/nlohmann-json/include
+)
+
+if(NOT NLOHMANN_JSON_INCLUDE_DIR)
+    message(FATAL_ERROR "nlohmann/json.hpp not found")
+endif()
+
+# Include directories
+include_directories(
+    ${PROJECT_SOURCE_DIR}/src
+    ${Boost_INCLUDE_DIRS}
+    ${GTK_INCLUDE_DIRS}
+    ${SFML_INCLUDE_DIR}
+    ${JSONCPP_INCLUDE_DIRS}
+    ${NLOHMANN_JSON_INCLUDE_DIR}
+)
+
+# Link directories
+link_directories(${GTK_LIBRARY_DIRS})
+
+# Main executable
 add_executable(CellViz
     src/cellviz.cpp
     src/cells.cpp
@@ -20,69 +54,19 @@ add_executable(CellViz
     src/visualizer.h
 )
 
-# Find Boost
-find_package(Boost REQUIRED COMPONENTS system)
-target_include_directories(CellViz PUBLIC ${Boost_INCLUDE_DIRS})
-
-# Find GTK+ 3.0
-find_package(PkgConfig REQUIRED)
-pkg_check_modules(GTK REQUIRED gtk+-3.0)
-include_directories(${GTK_INCLUDE_DIRS})
-target_link_directories(CellViz PRIVATE ${GTK_LIBRARY_DIRS})
-
-# Get linker flags directly from pkg-config
-execute_process(
-    COMMAND pkg-config --libs gtk+-3.0
-    OUTPUT_VARIABLE GTK3_LDFLAGS
-    OUTPUT_STRIP_TRAILING_WHITESPACE
-)
-
-message(STATUS "GTK3_LDFLAGS: ${GTK3_LDFLAGS}")
-
-# Split the flags into a list
-separate_arguments(GTK3_LDFLAGS_LIST UNIX_COMMAND "${GTK3_LDFLAGS}")
-
-# Link libraries
-# Removed duplicate link to JsonCpp and fixed linking order
-# Install JsonCpp using Homebrew and set correct paths
-execute_process(COMMAND brew install jsoncpp)
-find_library(JSONCPP_LIB jsoncpp HINTS /opt/homebrew/lib /usr/local/lib /usr/lib /opt/homebrew/opt/jsoncpp/lib)
-find_path(JSONCPP_INCLUDE_DIR json/json.h HINTS /opt/homebrew/include /usr/local/include /usr/include /opt/homebrew/opt/jsoncpp/include)
-
-if(NOT JSONCPP_LIB)
-    message(FATAL_ERROR "JsonCpp library not found after installation attempt")
-endif()
-
-if(NOT JSONCPP_INCLUDE_DIR)
-    message(FATAL_ERROR "JsonCpp include directory not found after installation attempt")
-endif()
-
-# Find nlohmann/json
-execute_process(COMMAND brew install nlohmann-json)
-find_path(NLOHMANN_JSON_INCLUDE_DIR nlohmann/json.hpp HINTS /opt/homebrew/include /usr/local/include /usr/include /opt/homebrew/opt/nlohmann-json/include)
-
-if(NOT NLOHMANN_JSON_INCLUDE_DIR)
-    message(FATAL_ERROR "nlohmann/json.hpp not found after installation attempt")
-endif()
-
-target_include_directories(CellViz PUBLIC ${JSONCPP_INCLUDE_DIR} ${NLOHMANN_JSON_INCLUDE_DIR})
+# Linking libraries
 target_link_libraries(CellViz
-    ${GTK3_LDFLAGS_LIST}
+    ${GTK_LIBRARIES}
     ${Boost_LIBRARIES}
-    sfml-graphics sfml-window sfml-system
-    ${JSONCPP_LIB}
+    sfml-graphics
+    sfml-window
+    sfml-system
     CURL::libcurl
+    JsonCpp::JsonCpp
     "-framework Cocoa"
     "-framework Carbon"
     "-framework CoreGraphics"
 )
-
-# Find SFML
-find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
-target_include_directories(CellViz PUBLIC ${SFML_INCLUDE_DIR})
-
-# Find CURL
-find_package(CURL REQUIRED)
 
 # Data fetching executable
 add_executable(data
@@ -90,15 +74,15 @@ add_executable(data
     src/data.cpp
     src/data.h
 )
+
 target_link_libraries(data
     CURL::libcurl
-    ${JSONCPP_LIB}
+    JsonCpp::JsonCpp
     pthread
     ${Boost_LIBRARIES}
 )
 
-# Google Test setup
-find_package(GTest REQUIRED)
+# Testing executable
 add_executable(runTests
     tests/tests.cpp
     src/cells.cpp
@@ -107,9 +91,17 @@ add_executable(runTests
     src/board.h
 )
 
-# Include nlohmann/json for tests
-target_include_directories(runTests PUBLIC ${PROJECT_SOURCE_DIR}/src ${GTEST_INCLUDE_DIRS} ${NLOHMANN_JSON_INCLUDE_DIR})
-target_link_libraries(runTests GTest::GTest GTest::Main pthread)
+target_include_directories(runTests PRIVATE 
+    ${PROJECT_SOURCE_DIR}/src
+    ${GTEST_INCLUDE_DIRS}
+    ${NLOHMANN_JSON_INCLUDE_DIR}
+)
+
+target_link_libraries(runTests 
+    GTest::gtest 
+    GTest::gtest_main
+    pthread
+)
 
 # Enable testing
 enable_testing()
