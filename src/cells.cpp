@@ -225,16 +225,23 @@ void SmithLife::compute(Board &board) {
                     }
                 }
                 if (cell->get_value() == 1) {
-                    if (count < 2 || count > 3) {
-                        cell->set_value(0);
+                    if (count < 2 || count > 3) { // we see if we kill the cell
+                        auto pointer_to_cell = grid[i][j];
+                        auto smith_life = dynamic_cast<SmithLife*>(pointer_to_cell);
+                        smith_life->set_value(0);
                     }
                 } else {
                     if (count == 3) {
-                        cell->set_value(1);
+                        auto pointer_to_cell = grid[i][j];
+                        auto smith_life = dynamic_cast<SmithLife*>(pointer_to_cell);
+                        smith_life->set_value(1);
                     }
                 }
+                // to make things interesting, we add a 5% chance of a cell dying
                 if (rand() % 100 < 5) {
-                    cell->set_value(0);
+                    auto pointer_to_cell = grid[i][j];
+                    auto smith_life = dynamic_cast<SmithLife*>(pointer_to_cell);
+                    smith_life->set_value(0);
                 }
             }
         }
