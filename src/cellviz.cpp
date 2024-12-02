@@ -13,6 +13,7 @@
 #include "visualizer.h"
 #include "board.h"
 #include "cells.h"
+#include <gtk/gtk.h>
 
 using json = nlohmann::json;
 
@@ -31,6 +32,37 @@ void save_frame(const sf::RenderWindow &window, int frame_number) {
 
 int main(int argc, char *argv[])
 {
+
+
+    gtk_init(&argc, &argv);
+
+    GtkWidget *windowg = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(windowg), "CellViz!");
+    gtk_window_set_default_size(GTK_WINDOW(windowg), 400, 300);
+
+    g_signal_connect(windowg, "destroy", G_CALLBACK(gtk_main_quit), NULL);
+
+    GtkWidget *label = gtk_label_new("CellViz - Cellular Automata Visualizer");
+
+    // use mean or median toggle
+    GtkWidget *mean_median_toggle = gtk_combo_box_text_new();
+    gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(mean_median_toggle), "Mean");
+    gtk_combo_box_text_append_text(GTK_COMBO_BOX_TEXT(mean_median_toggle), "Median");
+    gtk_combo_box_set_active(GTK_COMBO_BOX(mean_median_toggle), 0);
+
+    // add all
+    GtkWidget *vbox = gtk_box_new(GTK_ORIENTATION_VERTICAL, 5);
+    gtk_container_add(GTK_CONTAINER(windowg), vbox);
+    gtk_box_pack_start(GTK_BOX(vbox), label, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(vbox), mean_median_toggle, TRUE, TRUE, 0);
+
+    // add button to close the window
+    GtkWidget *button = gtk_button_new_with_label("Run Simulation");
+    g_signal_connect_swapped(button, "clicked", G_CALLBACK(gtk_widget_destroy), windowg);
+    gtk_box_pack_start(GTK_BOX(vbox), button, TRUE, TRUE, 0);
+
+    gtk_widget_show_all(windowg);
+    gtk_main();
 
     // CLI SECTION:
     /// help message
@@ -57,8 +89,8 @@ int main(int argc, char *argv[])
     json_file >> j;
 
     // Extract Time Series Data
-    double count = 0;
-    auto time_series = j["Time Series (5min)"];
+    int count = 0;
+    auto time_series = j["Time Series (Daily)"];
     vector<double> prices;
     for (auto& [key, value] : time_series.items()) {
         double close_price = stod(value["4. close"].get<string>());
@@ -77,24 +109,42 @@ int main(int argc, char *argv[])
     //shuffle(prices.begin(), prices.end(), std::mt19937(std::random_device()())); // suggested by inteligence
 
     double sum = 0;
-    double mean = 0;
+    double mean = 0, median = 0;
     for (const auto& price : prices) sum += price; //
     mean = sum / count;
+    sort(prices.begin(), prices.end());
+    if (count % 2 == 0) {
+        median = (prices[count / 2 - 1] + prices[count / 2]) / 2;
+    } else {
+        median = prices[count / 2];
+    }
 
-    int size = count / 2;
+
+    int size = count / 8;
 
 
     Board board(size, size, GRID,size*size);
-    Visualiser visualiser(board, size, 3, 1, sf::Color::Black, sf::Color::White);
+    Visualiser visualiser(board, size, 4, 1, sf::Color::Black, sf::Color::White);
     sf::RenderWindow& window = visualiser.GetWindow();
 
     string species = "x";
-    int c = 0;
+    // create a vector itterator
+    auto start = prices.begin();
+    int mean_or_median_value = 0;
+    if (mean_or_median_value == 0) {
+        mean_or_median_value = mean;
+    } else {
+        mean_or_median_value = median;
+    }
+
     for (int i = 0 ; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            SmithLife *cell = new SmithLife(i, j, prices[c] < mean ? 0 : 1); // create a cell object
+            double value = *start;
+            SmithLife *cell = new SmithLife(i, j, value < mean_or_median_value? 0 : 1); // we make it 1 if it did better than the mean
             board.add_cell(cell); // add to the board..
-            c+=1;
+            if (start == prices.end())
+                start = prices.begin();
+            start++;
         }
     }
     visualiser.UpdateBoard();
@@ -119,7 +169,12 @@ int main(int argc, char *argv[])
         // board.render() for CLI rendering
         cout << "Rendering" << endl;
         // now for timeouts
-        //sf::sleep(sf::milliseconds(100));
+        //sf::sleep(sf::milliseconds(1000));
+        // if less than 5 live cells, break
+        if (board.get_current_population() < 5) {
+            break;
+        }
+
     }
 
     if (argc < 3) {
@@ -139,6 +194,7 @@ int main(int argc, char *argv[])
         return 0;
     }
     //system(("ffmpeg -framerate 10 -i frame_%05d.png -c:v libx264 -pix_fmt yuv420p " + output_file).c_str());
+    system("rm frame_*.png");
 
     return 0;
 

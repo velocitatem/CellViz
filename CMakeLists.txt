@@ -25,9 +25,21 @@ find_package(Boost REQUIRED COMPONENTS system)
 include_directories(${Boost_INCLUDE_DIRS})
 link_directories(${Boost_LIBRARY_DIRS})
 
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GTK REQUIRED gtk+-3.0)
+
+# Include GTK headers
+include_directories(${GTK_INCLUDE_DIRS})
+
+# Link GTK libraries
+link_directories(${GTK_LIBRARY_DIRS})
+add_definitions(${GTK_CFLAGS_OTHER})
+
+
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
 include_directories(${SFML_INCLUDE_DIR})
-target_link_libraries(CellViz sfml-graphics sfml-window sfml-system curl jsoncpp pthread ${Boost_LIBRARIES})
+target_link_libraries(CellViz sfml-graphics sfml-window sfml-system curl jsoncpp pthread ${Boost_LIBRARIES} ${GTK_LIBRARIES})
+
 
 
 add_executable(data src/fetch_intraday.cpp src/data.cpp src/data.h) # TODO: move to individual library

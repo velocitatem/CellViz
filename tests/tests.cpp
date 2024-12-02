@@ -7,6 +7,7 @@
 #include <board.h>
 #include <cells.h>
 
+
 TEST(test1, test1) {
     // A test to test tests
     EXPECT_EQ(1, 1);
@@ -53,7 +54,7 @@ TEST(SmithLifeTest, Initialization) {
 
 TEST(BoardTest, AddCell) {
     Board board(5, 5, GRID, 3);
-    SmithLife *cell = new SmithLife(0, 0, 8.0);
+    SmithLife *cell = new SmithLife(0, 0, 1);
     board.add_cell(cell);
     EXPECT_EQ(board.get_current_population(), 1);
     CellularAutomaton *cell2 = board.get_cell(0, 0);
@@ -61,14 +62,14 @@ TEST(BoardTest, AddCell) {
     // state persistence
     EXPECT_EQ(cell3->get_x(), 0);
     EXPECT_EQ(cell3->get_y(), 0);
-    EXPECT_EQ(cell3->get_value(), 8.0);
+    EXPECT_EQ(cell3->get_value(), 1);
 }
 
 TEST(BoardTest, AddCell2) {
     Board board(5, 5, GRID, 3);
     SmithLife *cell = new SmithLife(0, 0, 8.0);
     board.add_cell(cell);
-    SmithLife *cell2 = new SmithLife(0, 0, 8.0);
+    SmithLife *cell2 = new SmithLife(0, 1, 8.0);
     board.add_cell(cell2);
     EXPECT_EQ(board.get_current_population(), 2);
     CellularAutomaton *cell3 = board.get_cell(0, 0);
