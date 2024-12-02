@@ -20,27 +20,27 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Install dependencies (vcpkg)
-        run: |
-          choco install vcpkg --yes
-          vcpkg install boost:x64-windows sfml:x64-windows nlohmann-json:x64-windows curl:x64-windows jsoncpp:x64-windows gtk:x64-windows || exit 1
-
-      - name: Set up CMake
-        uses: lukka/get-cmake
+      - name: Set up vcpkg
+        uses: lukka/run-vcpkg@v11
         with:
-          cmake-version: '3.22.0'
+          vcpkgGitCommitId: 'latest'
+          runVcpkgInstall: true
 
-      - name: Build the project
+      - name: Configure CMake
         run: |
           mkdir build
           cd build
-          cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage" -G "Visual Studio 16 2019" ..
-          cmake --build . --config Debug
+          cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_TOOLCHAIN_FILE=${{ github.workspace }}\vcpkg\scripts\buildsystems\vcpkg.cmake ..
+
+      - name: Build the project
+        run: |
+          cd build
+          cmake --build .
 
       - name: Run tests
         run: |
           cd build
-          ctest -C Debug --output-on-failure --gtest_output="xml:test-results.xml"
+          ctest --output-on-failure --C Debug
 
       - name: Generate code coverage report
         run: |
@@ -62,14 +62,14 @@ jobs:
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          files: "test-results.xml"
+          files: "build/test-results.xml"
         continue-on-error: true
 
-      - name: 'Upload Artifact'
+      - name: Upload Artifact
         if: success()
         uses: actions/upload-artifact@v4
         with:
           name: CellViz
-          path: ./build/Debug/CellViz.exe
+          path: ./build/CellViz.exe
           retention-days: 5
           continue-on-error: true
