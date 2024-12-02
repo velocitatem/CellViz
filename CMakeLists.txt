@@ -7,30 +7,11 @@ project(CellViz CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# Manually set JsonCpp paths for Homebrew
-find_path(JSONCPP_INCLUDE_DIR 
-    NAMES json/json.h
-    HINTS 
-    /opt/homebrew/include
-    /usr/local/include
-)
+# Set CMake policy to handle Boost deprecation
+cmake_policy(SET CMP0167 NEW)
 
-find_library(JSONCPP_LIBRARY 
-    NAMES jsoncpp
-    HINTS 
-    /opt/homebrew/lib
-    /usr/local/lib
-)
-
-if(NOT JSONCPP_INCLUDE_DIR)
-    message(FATAL_ERROR "JsonCpp include directory not found")
-endif()
-
-if(NOT JSONCPP_LIBRARY)
-    message(FATAL_ERROR "JsonCpp library not found")
-endif()
-
-# Find other required packages
+# Find required packages
+find_package(JsonCpp REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(PkgConfig REQUIRED)
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
@@ -40,7 +21,7 @@ find_package(GTest REQUIRED)
 # PKG-CONFIG for GTK
 pkg_check_modules(GTK REQUIRED gtk+-3.0)
 
-# nlohmann/json
+# Locate nlohmann/json header
 find_path(NLOHMANN_JSON_INCLUDE_DIR nlohmann/json.hpp 
     HINTS 
     /opt/homebrew/include 
@@ -59,7 +40,7 @@ include_directories(
     ${Boost_INCLUDE_DIRS}
     ${GTK_INCLUDE_DIRS}
     ${SFML_INCLUDE_DIR}
-    ${JSONCPP_INCLUDE_DIR}
+    ${JSONCPP_INCLUDE_DIRS}
     ${NLOHMANN_JSON_INCLUDE_DIR}
 )
 
@@ -76,7 +57,7 @@ add_executable(CellViz
     src/visualizer.h
 )
 
-# Linking libraries
+# Linking libraries for the main executable
 target_link_libraries(CellViz
     ${GTK_LIBRARIES}
     ${Boost_LIBRARIES}
@@ -84,7 +65,7 @@ target_link_libraries(CellViz
     sfml-window
     sfml-system
     CURL::libcurl
-    ${JSONCPP_LIBRARY}
+    JsonCpp::JsonCpp
     "-framework Cocoa"
     "-framework Carbon"
     "-framework CoreGraphics"
@@ -99,7 +80,7 @@ add_executable(data
 
 target_link_libraries(data
     CURL::libcurl
-    ${JSONCPP_LIBRARY}
+    JsonCpp::JsonCpp
     pthread
     ${Boost_LIBRARIES}
 )
@@ -113,12 +94,14 @@ add_executable(runTests
     src/board.h
 )
 
+# Include directories for testing
 target_include_directories(runTests PRIVATE 
     ${PROJECT_SOURCE_DIR}/src
     ${GTEST_INCLUDE_DIRS}
     ${NLOHMANN_JSON_INCLUDE_DIR}
 )
 
+# Linking libraries for testing
 target_link_libraries(runTests 
     GTest::gtest 
     GTest::gtest_main
