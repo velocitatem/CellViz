@@ -20,6 +20,7 @@ enum BoardType {
 
 class Board {
 public:
+    Board();
     Board(int width, int height, BoardType type, int population = 0);
     // copy constructor
     Board(const Board &board);
@@ -29,11 +30,14 @@ public:
     void set_grid(vector<vector<DiscreteAutomaton*>> & grid);
     void set_continuum(vector<ContinuousAutomaton*> & continuous);
     CellularAutomaton* get_cell(int x, int y) const;
-    vector<ContinuousAutomaton*> get_continuous() const;
-    vector<vector<DiscreteAutomaton*>> get_grid() const;
+    vector<ContinuousAutomaton*> get_continuous();
+    vector<vector<DiscreteAutomaton*>> get_grid();
     int get_current_population();
+    int get_width();
+    int get_height();
     void render();
-    // TODO: Add a move constructor, copy assignment operator, and move assignment operator.
+    // copy assignment
+    Board operator=(const Board &board); // RULE OF 3
 
 
 private:

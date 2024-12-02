@@ -10,6 +10,7 @@
 
 using namespace std;
 
+Board::Board() : width(0), height(0), type(GRID), population(0), current_population(0) {}
 Board::Board(int width, int height, BoardType type, int population) :
     width(width), height(height), type(type), population(population), current_population(0) {
     if (type == GRID) {
@@ -33,6 +34,26 @@ Board::Board(const Board &board) {
         continuous = board.continuous;
     }
 }
+
+Board Board::operator=(const Board &board) {
+    if (this == &board) {
+        return *this;
+    }
+    width = board.width;
+    height = board.height;
+    type = board.type;
+    population = board.population;
+    current_population = board.current_population;
+    if (type == GRID) {
+        grid = board.grid;
+    }
+    else if (type == CONTINUOUS) {
+        continuous = board.continuous;
+    }
+    cout << "Board assignment operator called" << endl;
+    return *this;
+}
+
 
 
 
@@ -69,15 +90,15 @@ void Board::add_cell(CellularAutomaton *cell) {
 }
 
 
-vector<vector<DiscreteAutomaton*>> Board::get_grid() const {
+vector<vector<DiscreteAutomaton*>> Board::get_grid() {
     return grid;
 }
 
-void Board::set_grid(vector<vector<DiscreteAutomaton*>> &grid) {
-    this->grid = grid;
+void Board::set_grid(vector<vector<DiscreteAutomaton*>> &new_grid) {
+    grid = new_grid;
 }
 
-vector<ContinuousAutomaton*> Board::get_continuous() const {
+vector<ContinuousAutomaton*> Board::get_continuous() {
     return continuous;
 }
 
@@ -85,7 +106,13 @@ void Board::set_continuum(vector<ContinuousAutomaton*> &continuous) {
     this->continuous = continuous;
 }
 
+int Board::get_width() {
+    return width;
+}
 
+int Board::get_height() {
+    return height;
+}
 
 
 int Board::get_current_population() {
@@ -119,9 +146,10 @@ void Board::render () {
                 }
                 DiscreteAutomaton* cell = dynamic_cast<DiscreteAutomaton*>(c);
                 if (cell) {
-                    printf("%d ", static_cast<int>(cell->get_value()));
+                    //printf("%d ", static_cast<int>(cell->get_value()));
+                    cout << static_cast<int>(cell->get_value()) << " ";
                 } else {
-                    printf("0 ");
+                    cout << "0 ";
                 }
             }
             printf("\n");

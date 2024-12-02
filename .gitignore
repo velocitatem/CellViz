@@ -1,16 +1,13 @@
-cmake-build-debug/
 
-# Ignore build folder
+# Ignore CMake build directories and generated files
+cmake-build-debug/
 build/
+CMakeCache.txt
+CMakeFiles/
+*.cmake
 
 # Ignore vscode settings folder
 .vscode/
-
-
-- src/data
-
-- src/fetch
-
-
-src/show_data.json
-secrets.json
+build/
+src/Makefile
+.env
