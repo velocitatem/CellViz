@@ -44,8 +44,8 @@ separate_arguments(GTK3_LDFLAGS_LIST UNIX_COMMAND "${GTK3_LDFLAGS}")
 
 # Link libraries
 # Removed duplicate link to JsonCpp and fixed linking order
-find_library(JSONCPP_LIB jsoncpp HINTS /opt/homebrew/lib /usr/local/lib /usr/lib)
-find_path(JSONCPP_INCLUDE_DIR json/json.h HINTS /opt/homebrew/include /usr/local/include /usr/include)
+find_library(JSONCPP_LIB jsoncpp HINTS /opt/homebrew/lib /usr/local/lib /usr/lib /opt/homebrew/opt/jsoncpp/lib)
+find_path(JSONCPP_INCLUDE_DIR json/json.h HINTS /opt/homebrew/include /usr/local/include /usr/include /opt/homebrew/opt/jsoncpp/include)
 
 if(NOT JSONCPP_LIB)
     message(FATAL_ERROR "JsonCpp library not found")
@@ -56,7 +56,7 @@ if(NOT JSONCPP_INCLUDE_DIR)
 endif()
 
 # Find nlohmann/json
-find_path(NLOHMANN_JSON_INCLUDE_DIR nlohmann/json.hpp HINTS /opt/homebrew/include /usr/local/include /usr/include)
+find_path(NLOHMANN_JSON_INCLUDE_DIR nlohmann/json.hpp HINTS /opt/homebrew/include /usr/local/include /usr/include /opt/homebrew/opt/nlohmann-json/include)
 
 if(NOT NLOHMANN_JSON_INCLUDE_DIR)
     message(FATAL_ERROR "nlohmann/json.hpp not found")
