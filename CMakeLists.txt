@@ -7,7 +7,11 @@ project(CellViz CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# Set the CMake prefix path for dependencies
+set(CMAKE_PREFIX_PATH "/usr/lib/cmake/jsoncpp" ${CMAKE_PREFIX_PATH})
+
 # Find required packages
+find_package(JsonCpp REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system)
 find_package(PkgConfig REQUIRED)
 find_package(SFML 2.5 COMPONENTS graphics window system REQUIRED)
@@ -17,8 +21,7 @@ find_package(GTest REQUIRED)
 # PKG-CONFIG for GTK
 pkg_check_modules(GTK REQUIRED gtk+-3.0)
 
-# JsonCpp and nlohmann/json
-find_package(JsonCpp REQUIRED)
+# Locate nlohmann/json header
 find_path(NLOHMANN_JSON_INCLUDE_DIR nlohmann/json.hpp 
     HINTS 
     /opt/homebrew/include 
@@ -54,7 +57,7 @@ add_executable(CellViz
     src/visualizer.h
 )
 
-# Linking libraries
+# Linking libraries for the main executable
 target_link_libraries(CellViz
     ${GTK_LIBRARIES}
     ${Boost_LIBRARIES}
@@ -91,12 +94,14 @@ add_executable(runTests
     src/board.h
 )
 
+# Include directories for testing
 target_include_directories(runTests PRIVATE 
     ${PROJECT_SOURCE_DIR}/src
     ${GTEST_INCLUDE_DIRS}
     ${NLOHMANN_JSON_INCLUDE_DIR}
 )
 
+# Linking libraries for testing
 target_link_libraries(runTests 
     GTest::gtest 
     GTest::gtest_main
