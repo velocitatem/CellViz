@@ -1,3 +1,5 @@
+#!/bin/bash
+
 BINARIES="/home/velocitatem/CLionProjects/CellViz/cmake-build-debug/"
 STOCKS_LIST=(APPL GOOGL MSFT TSLA AMZN)
 for STOCK in "${STOCKS_LIST[@]}"

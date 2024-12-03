@@ -1,10 +1,8 @@
-//
-// Created by velocitatem on 10/2/24.
-//
 #ifndef BOARD_H
 #define BOARD_H
 
 #include <vector>
+#include <memory>
 #include "cells.h"
 
 class DiscreteAutomaton;
@@ -26,19 +24,18 @@ public:
     Board(const Board &board);
     ~Board();
 
-    void add_cell(CellularAutomaton *cell);
-    void set_grid(vector<vector<DiscreteAutomaton*>> & grid);
-    void set_continuum(vector<ContinuousAutomaton*> & continuous);
+    void add_cell(std::unique_ptr<CellularAutomaton> cell);
+    void set_grid(vector<vector<std::unique_ptr<DiscreteAutomaton>>> & grid);
+    void set_continuum(vector<std::unique_ptr<ContinuousAutomaton>> & continuous);
     CellularAutomaton* get_cell(int x, int y) const;
-    vector<ContinuousAutomaton*> get_continuous();
-    vector<vector<DiscreteAutomaton*>> get_grid();
+    vector<std::unique_ptr<ContinuousAutomaton>> get_continuous();
+    vector<vector<std::unique_ptr<DiscreteAutomaton>>> get_grid();
     int get_current_population();
     int get_width();
     int get_height();
     void render();
     // copy assignment
-    Board operator=(const Board &board); // RULE OF 3
-
+    Board& operator=(const Board &board); // RULE OF 3
 
 private:
     int width;
@@ -47,8 +44,8 @@ private:
     int population;
     int current_population;
 
-    vector<vector<DiscreteAutomaton*>> grid;
-    vector<ContinuousAutomaton*> continuous;
+    vector<vector<std::unique_ptr<DiscreteAutomaton>>> grid;
+    vector<std::unique_ptr<ContinuousAutomaton>> continuous;
 };
 
 #endif // BOARD_H

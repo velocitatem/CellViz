@@ -1,11 +1,8 @@
-//
-// Created by velocitatem on 9/27/24.
-//
 #include <complex>
 #include <fstream>
 #include <iostream>
-#include  <stdio.h>
-#include  <stdlib.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include <random>
 #include <vector>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -30,10 +27,7 @@ void save_frame(const sf::RenderWindow &window, int frame_number) {
     screenshot.saveToFile(filename.str());
 }
 
-int main(int argc, char *argv[])
-{
-
-
+int main(int argc, char *argv[]) {
     gtk_init(&argc, &argv);
 
     GtkWidget *windowg = gtk_window_new(GTK_WINDOW_TOPLEVEL);
@@ -75,13 +69,12 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    // chekc json file
+    // check json file
     string json_file_path = argv[1];
     if (json_file_path.find(".json") == string::npos) {
         cout << "Invalid JSON file" << endl;
         return 1;
     }
-
 
     // Read JSON file
     std::ifstream json_file(json_file_path);
@@ -93,24 +86,17 @@ int main(int argc, char *argv[])
     auto time_series = j["Time Series (Daily)"];
     vector<double> prices;
     for (auto& [key, value] : time_series.items()) {
-        double close_price = stod(value["4. close"].get<string>());
-        double open_price = stod(value["1. open"].get<string>());
-        double high_price = stod(value["2. high"].get<string>());
-        double low_price = stod(value["3. low"].get<string>());
-        // because we are low on data and the stock market does not have as much viable different data each day
-        // we will use the same data for each day (different sub-data)
-        prices.push_back(close_price);
-        prices.push_back(open_price);
-        prices.push_back(high_price);
-        prices.push_back(low_price);
-        count += 4;
+        prices.push_back(stod(value["4. close"].get<string>()));
+        count++;
     }
 
-    //shuffle(prices.begin(), prices.end(), std::mt19937(std::random_device()())); // suggested by inteligence
+    // shuffle(prices.begin(), prices.end(), std::mt19937(std::random_device()())); // suggested by intelligence
 
     double sum = 0;
     double mean = 0, median = 0;
-    for (const auto& price : prices) sum += price; //
+    for (const auto& price : prices) {
+        sum += price;
+    }
     mean = sum / count;
     sort(prices.begin(), prices.end());
     if (count % 2 == 0) {
@@ -119,84 +105,41 @@ int main(int argc, char *argv[])
         median = prices[count / 2];
     }
 
-
     int size = count / 8;
-
-
-    Board board(size, size, GRID,size*size);
-    Visualiser visualiser(board, size, 4, 1, sf::Color::Black, sf::Color::White);
-    sf::RenderWindow& window = visualiser.GetWindow();
-
-    string species = "x";
-    // create a vector itterator
+    Board board(size, size, GRID, 3);
     auto start = prices.begin();
-    int mean_or_median_value = 0;
-    if (mean_or_median_value == 0) {
-        mean_or_median_value = mean;
-    } else {
-        mean_or_median_value = median;
-    }
-
-    for (int i = 0 ; i < size; i++) {
+    for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
             double value = *start;
-            SmithLife *cell = new SmithLife(i, j, value < mean_or_median_value? 0 : 1); // we make it 1 if it did better than the mean
-            board.add_cell(cell); // add to the board..
+            auto cell = std::make_unique<SmithLife>(i, j, value < mean ? 0 : 1);
+            board.add_cell(std::move(cell));
             if (start == prices.end())
                 start = prices.begin();
             start++;
         }
     }
-    visualiser.UpdateBoard();
 
-    int frame = 0;
+    sf::RenderWindow window(sf::VideoMode(size * 10, size * 10), "Cellular Automaton");
+    Visualiser visualiser(board, size, 10, 1, sf::Color::Black, sf::Color::White);
+
+    int frame_number = 0;
     while (window.isOpen()) {
         sf::Event event;
-        while (window.pollEvent(event)) { // so that we can exit the program
+        while (window.pollEvent(event)) {
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-        try {
-            SmithLife::compute(board); // compute the board according to what we want to run
-        } catch (exception &e) {
-            cout << e.what() << endl;
-        }
 
         visualiser.UpdateBoard();
+        save_frame(window, frame_number++);
+    }
 
-        save_frame(window, frame++);
-
-        // board.render() for CLI rendering
-        cout << "Rendering" << endl;
-        // now for timeouts
-        //sf::sleep(sf::milliseconds(1000));
-        // if less than 5 live cells, break
-        if (board.get_current_population() < 5) {
-            break;
+    if (argc >= 3) {
+        string output_file = argv[2];
+        if (output_file.find(".mp4") != string::npos) {
+            // Code to convert frames to video
         }
-
     }
-
-    if (argc < 3) {
-        return 0;
-    }
-    // check if output file is specified
-    string output_file = argv[2];
-    if (output_file.find(".mp4") == string::npos) {
-        cout << "Invalid output file" << endl;
-        return 1;
-    }
-
-    try {
-        system("ffmpeg -version");
-    } catch (exception &e) {
-        cout << "FFMPEG is not installed" << endl;
-        return 0;
-    }
-    //system(("ffmpeg -framerate 10 -i frame_%05d.png -c:v libx264 -pix_fmt yuv420p " + output_file).c_str());
-    system("rm frame_*.png");
 
     return 0;
-
-
 }

@@ -15,9 +15,7 @@ public:
     Visualiser();
     Visualiser(Board &board, int bSize, int cSize, int maxValue, sf::Color bCol, sf::Color cCol);
     virtual void UpdateBoard();
-    sf::RenderWindow& GetWindow(){
-        return window;
-    }
+    sf::RenderWindow& GetWindow();
     sf::Color CalculateCellColor(Board& board, int x, int y);
 protected:
     Board &board;

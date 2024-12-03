@@ -19,22 +19,18 @@ int main(int argc, char* argv[])
         const char *stonk = (argc > 1) ? argv[1] : "AAPL";
         bool adjusted = (argc > 2) ? (std::string(argv[2]) == "true") : true;
         bool extended_hours = (argc > 3) ? (std::string(argv[3]) == "true") : true;
-        std::string month = (argc > 4) ? argv[4] : "";
-        std::string outputsize = (argc > 5) ? argv[5] : "compact";
-        std::string datatype = (argc > 6) ? argv[6] : "json";
+        const std::string month = (argc > 4) ? argv[4] : "2024-09";
+        const std::string outputsize = (argc > 5) ? argv[5] : "compact";
+        const std::string datatype = (argc > 6) ? argv[6] : "json";
 
-        // Use a lambda to start the thread
-        std::thread apiThread([=]() { fetchDataWithRetry(apikey, adjusted, extended_hours, month, outputsize, datatype, 3, stonk); });
-        
-        apiThread.join();
+        fetchDataWithRetry(apikey, adjusted, extended_hours, month, outputsize, datatype, 3, stonk);
     } catch (const std::exception& e) {
         std::cerr << "Error: " << e.what() << std::endl;
+        curl_global_cleanup();
+        return 1;
     }
     // Clean up CURL
     curl_global_cleanup();
-
-
-    // Read JSON file
 
     return 0;
 }

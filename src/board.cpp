@@ -1,7 +1,3 @@
-//
-// Created by velocitatem on 10/2/24.
-//
-
 #include "board.h"
 
 #include <cstdlib>
@@ -14,10 +10,10 @@ Board::Board() : width(0), height(0), type(GRID), population(0), current_populat
 Board::Board(int width, int height, BoardType type, int population) :
     width(width), height(height), type(type), population(population), current_population(0) {
     if (type == GRID) {
-        grid = vector<vector<DiscreteAutomaton*>>(height, vector<DiscreteAutomaton*>(width, nullptr));
+        grid = vector<vector<std::unique_ptr<DiscreteAutomaton>>>(height, vector<std::unique_ptr<DiscreteAutomaton>>(width, nullptr));
     }
     else if (type == CONTINUOUS) {
-        continuous = vector<ContinuousAutomaton*>(population, nullptr);
+        continuous = vector<std::unique_ptr<ContinuousAutomaton>>(population, nullptr);
     }
 }
 
@@ -35,7 +31,7 @@ Board::Board(const Board &board) {
     }
 }
 
-Board Board::operator=(const Board &board) {
+Board& Board::operator=(const Board &board) {
     if (this == &board) {
         return *this;
     }
@@ -54,56 +50,42 @@ Board Board::operator=(const Board &board) {
     return *this;
 }
 
-
-
-
 Board::~Board() {
-    if (type == GRID) {
-        for (auto& row : grid) {
-            for (auto& cell : row) {
-                delete cell;
-            }
-        }
-    } else if (type == CONTINUOUS) {
-        for (auto& cell : continuous) {
-            delete cell;
-        }
-    }
+    // No need to manually delete cells, smart pointers will handle it
 }
 
-void Board::add_cell(CellularAutomaton *cell) {
+void Board::add_cell(std::unique_ptr<CellularAutomaton> cell) {
     if (type == CONTINUOUS) {
-        auto *continuous_cell = dynamic_cast<ContinuousAutomaton*>(cell);
+        auto *continuous_cell = dynamic_cast<ContinuousAutomaton*>(cell.get());
         if (continuous_cell && current_population < population) {
-            continuous[current_population] = continuous_cell;
+            continuous[current_population] = std::move(cell);
             current_population++;
         }
     }
     else if (type == GRID) {
-        auto *discrete_cell = dynamic_cast<DiscreteAutomaton*>(cell);
+        auto *discrete_cell = dynamic_cast<DiscreteAutomaton*>(cell.get());
         if (discrete_cell && discrete_cell->get_x() >= 0 && discrete_cell->get_x() < width
             && discrete_cell->get_y() >= 0 && discrete_cell->get_y() < height) {
-            grid[discrete_cell->get_x()][discrete_cell->get_y()] = discrete_cell;
+            grid[discrete_cell->get_x()][discrete_cell->get_y()] = std::move(cell);
             current_population++;
         }
     }
 }
 
-
-vector<vector<DiscreteAutomaton*>> Board::get_grid() {
+vector<vector<std::unique_ptr<DiscreteAutomaton>>> Board::get_grid() {
     return grid;
 }
 
-void Board::set_grid(vector<vector<DiscreteAutomaton*>> &new_grid) {
-    grid = new_grid;
+void Board::set_grid(vector<vector<std::unique_ptr<DiscreteAutomaton>>> &new_grid) {
+    grid = std::move(new_grid);
 }
 
-vector<ContinuousAutomaton*> Board::get_continuous() {
+vector<std::unique_ptr<ContinuousAutomaton>> Board::get_continuous() {
     return continuous;
 }
 
-void Board::set_continuum(vector<ContinuousAutomaton*> &continuous) {
-    this->continuous = continuous;
+void Board::set_continuum(vector<std::unique_ptr<ContinuousAutomaton>> &continuous) {
+    this->continuous = std::move(continuous);
 }
 
 int Board::get_width() {
@@ -113,7 +95,6 @@ int Board::get_width() {
 int Board::get_height() {
     return height;
 }
-
 
 int Board::get_current_population() {
     int current_population = 0;
@@ -129,10 +110,10 @@ int Board::get_current_population() {
 
 CellularAutomaton* Board::get_cell(int x, int y) const {
     if (type == GRID && x >= 0 && x < height && y >= 0 && y < width) {
-        return grid[x][y];
+        return grid[x][y].get();
     }
     else if (type == CONTINUOUS && x >= 0 && x < current_population) {
-        return continuous[x];
+        return continuous[x].get();
     }
     return nullptr;
 }
