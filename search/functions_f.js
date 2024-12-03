@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['writecallback_140',['WriteCallback',['../data_8cpp.html#a5cc5d063f4f2d30bb4ba27757a15d45e',1,'WriteCallback(void *contents, size_t size, size_t nmemb, std::string *s):&#160;data.cpp'],['../data_8h.html#a5cc5d063f4f2d30bb4ba27757a15d45e',1,'WriteCallback(void *contents, size_t size, size_t nmemb, std::string *s):&#160;data.cpp']]]
+  ['visualiser_148',['Visualiser',['../classVisualiser.html#a9c5584fbd8f70548a6694e3a89c60538',1,'Visualiser::Visualiser()'],['../classVisualiser.html#a537af1a1f2dca78ebaf4088480852020',1,'Visualiser::Visualiser(Board &amp;board, int bSize, int cSize, int maxValue, sf::Color bCol, sf::Color cCol)']]]
 ];

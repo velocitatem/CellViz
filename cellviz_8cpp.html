@@ -68,7 +68,8 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#typedef-members">Typedefs</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#func-members">Functions</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle">
 <div class="title">cellviz.cpp File Reference</div>  </div>
 </div><!--header-->
@@ -94,10 +95,25 @@ Typedefs</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
+<tr class="memitem:a26674eca46d49b138b55e6a1f9fd976f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cellviz_8cpp.html#a26674eca46d49b138b55e6a1f9fd976f">on_mean_median_changed</a> (GtkComboBox *combo_box, gpointer user_data)</td></tr>
+<tr class="separator:a26674eca46d49b138b55e6a1f9fd976f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a103cababb566bbb91d34418af3838ff3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cellviz_8cpp.html#a103cababb566bbb91d34418af3838ff3">on_spin_button_changed</a> (GtkSpinButton *spin_button, gpointer user_data)</td></tr>
+<tr class="separator:a103cababb566bbb91d34418af3838ff3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a259d93a6296907b86a4449d9b2309bda"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cellviz_8cpp.html#a259d93a6296907b86a4449d9b2309bda">quit_sim</a> (GtkWidget *widget, gpointer data)</td></tr>
+<tr class="separator:a259d93a6296907b86a4449d9b2309bda"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6368733251eb5e1d0510cf63e62c1cb8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cellviz_8cpp.html#a6368733251eb5e1d0510cf63e62c1cb8">save_frame</a> (const sf::RenderWindow &amp;window, int frame_number)</td></tr>
 <tr class="separator:a6368733251eb5e1d0510cf63e62c1cb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cellviz_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
 <tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ac55ad2d1faf064afc1616b87cf97fb63"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cellviz_8cpp.html#ac55ad2d1faf064afc1616b87cf97fb63">median_toggle</a> = 0</td></tr>
+<tr class="separator:ac55ad2d1faf064afc1616b87cf97fb63"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac8883207deaee5ef5dfea8e20aba517"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cellviz_8cpp.html#aac8883207deaee5ef5dfea8e20aba517">cell_size</a> = 1</td></tr>
+<tr class="separator:aac8883207deaee5ef5dfea8e20aba517"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2a0172f62fceb7714004721e8ca793e7"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="cellviz_8cpp.html#a2a0172f62fceb7714004721e8ca793e7">want_quit</a> = false</td></tr>
+<tr class="separator:a2a0172f62fceb7714004721e8ca793e7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Typedef Documentation</h2>
 <a id="ab701e3ac61a85b337ec5c1abaad6742d"></a>
@@ -148,6 +164,90 @@ Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a26674eca46d49b138b55e6a1f9fd976f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a26674eca46d49b138b55e6a1f9fd976f">&#9670;&nbsp;</a></span>on_mean_median_changed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void on_mean_median_changed </td>
+          <td>(</td>
+          <td class="paramtype">GtkComboBox *&#160;</td>
+          <td class="paramname"><em>combo_box</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>user_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a103cababb566bbb91d34418af3838ff3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a103cababb566bbb91d34418af3838ff3">&#9670;&nbsp;</a></span>on_spin_button_changed()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void on_spin_button_changed </td>
+          <td>(</td>
+          <td class="paramtype">GtkSpinButton *&#160;</td>
+          <td class="paramname"><em>spin_button</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>user_data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a259d93a6296907b86a4449d9b2309bda"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a259d93a6296907b86a4449d9b2309bda">&#9670;&nbsp;</a></span>quit_sim()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void quit_sim </td>
+          <td>(</td>
+          <td class="paramtype">GtkWidget *&#160;</td>
+          <td class="paramname"><em>widget</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">gpointer&#160;</td>
+          <td class="paramname"><em>data</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a6368733251eb5e1d0510cf63e62c1cb8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a6368733251eb5e1d0510cf63e62c1cb8">&#9670;&nbsp;</a></span>save_frame()</h2>
 
@@ -170,6 +270,49 @@ Functions</h2></td></tr>
           <td></td>
           <td>)</td>
           <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Variable Documentation</h2>
+<a id="aac8883207deaee5ef5dfea8e20aba517"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac8883207deaee5ef5dfea8e20aba517">&#9670;&nbsp;</a></span>cell_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int cell_size = 1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac55ad2d1faf064afc1616b87cf97fb63"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac55ad2d1faf064afc1616b87cf97fb63">&#9670;&nbsp;</a></span>median_toggle</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int median_toggle = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2a0172f62fceb7714004721e8ca793e7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a0172f62fceb7714004721e8ca793e7">&#9670;&nbsp;</a></span>want_quit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool want_quit = false</td>
         </tr>
       </table>
 </div><div class="memdoc">

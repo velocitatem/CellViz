@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['visualiser_139',['Visualiser',['../classVisualiser.html#a9c5584fbd8f70548a6694e3a89c60538',1,'Visualiser::Visualiser()'],['../classVisualiser.html#a537af1a1f2dca78ebaf4088480852020',1,'Visualiser::Visualiser(Board &amp;board, int bSize, int cSize, int maxValue, sf::Color bCol, sf::Color cCol)']]]
+  ['updateboard_147',['UpdateBoard',['../classVisualiser.html#a5542ea4f03c868bb26e6e1fa467a26a7',1,'Visualiser::UpdateBoard()'],['../classRainbowVisualiser.html#a04f8f5b6080729b0b7d0a725317d8931',1,'RainbowVisualiser::UpdateBoard()']]]
 ];

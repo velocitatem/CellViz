@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['rainbowvisualiser_88',['RainbowVisualiser',['../classRainbowVisualiser.html',1,'']]]
+  ['rainbowvisualiser_94',['RainbowVisualiser',['../classRainbowVisualiser.html',1,'']]]
 ];

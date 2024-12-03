@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['width_73',['width',['../classBoard.html#a90a8efaa4736af25511ac948bdd27d6c',1,'Board']]],
-  ['window_74',['window',['../classVisualiser.html#a37f9401c9ed805c393f5f90defab19f4',1,'Visualiser']]],
-  ['writecallback_75',['WriteCallback',['../data_8cpp.html#a5cc5d063f4f2d30bb4ba27757a15d45e',1,'WriteCallback(void *contents, size_t size, size_t nmemb, std::string *s):&#160;data.cpp'],['../data_8h.html#a5cc5d063f4f2d30bb4ba27757a15d45e',1,'WriteCallback(void *contents, size_t size, size_t nmemb, std::string *s):&#160;data.cpp']]]
+  ['value_74',['value',['../classDiscreteAutomaton.html#aa544088426e4e02058d78d1133687aa5',1,'DiscreteAutomaton::value()'],['../classBasicLife.html#a9985c5949e6e63d7c7368511163436ab',1,'BasicLife::value()'],['../classSmithLife.html#aba687f29369ef8229aec42e96997e059',1,'SmithLife::value()']]],
+  ['visualiser_75',['Visualiser',['../classVisualiser.html',1,'Visualiser'],['../classVisualiser.html#a9c5584fbd8f70548a6694e3a89c60538',1,'Visualiser::Visualiser()'],['../classVisualiser.html#a537af1a1f2dca78ebaf4088480852020',1,'Visualiser::Visualiser(Board &amp;board, int bSize, int cSize, int maxValue, sf::Color bCol, sf::Color cCol)']]],
+  ['visualizer_2ecpp_76',['visualizer.cpp',['../visualizer_8cpp.html',1,'']]],
+  ['visualizer_2eh_77',['visualizer.h',['../visualizer_8h.html',1,'']]]
 ];

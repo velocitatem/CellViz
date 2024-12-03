@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['_7eboard_141',['~Board',['../classBoard.html#af73f45730119a1fd8f6670f53f959e68',1,'Board']]],
-  ['_7ecellularautomaton_142',['~CellularAutomaton',['../classCellularAutomaton.html#ae3839b1e441e2653c4216bc86c65d990',1,'CellularAutomaton']]],
-  ['_7esmithlife_143',['~SmithLife',['../classSmithLife.html#a3327d312008d14657a82a56bec71834a',1,'SmithLife']]]
+  ['writecallback_149',['WriteCallback',['../data_8cpp.html#a5cc5d063f4f2d30bb4ba27757a15d45e',1,'WriteCallback(void *contents, size_t size, size_t nmemb, std::string *s):&#160;data.cpp'],['../data_8h.html#a5cc5d063f4f2d30bb4ba27757a15d45e',1,'WriteCallback(void *contents, size_t size, size_t nmemb, std::string *s):&#160;data.cpp']]]
 ];
