@@ -1,6 +1,6 @@
 <h1 style="text-align: center;">CellViz</h1>
 
-[![GitHub release](https://img.shields.io/github/v/release/velocitatem/CellViz)](https://github.com/velocitatem/CellViz/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://img.shields.io/github/actions/workflow/status/velocitatem/CellViz/ci.yml)](https://github.com/velocitatem/CellViz/actions) [![Language: C++](https://img.shields.io/badge/language-C%2B%2B-%23f34b7d)](https://en.wikipedia.org/wiki/C%2B%2B) [![Platform: Ubuntu](https://img.shields.io/badge/platform-Ubuntu-orange)](https://ubuntu.com/)
+[![GitHub release](https://img.shields.io/github/v/release/velocitatem/CellViz)](https://github.com/velocitatem/CellViz/releases) [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT) [![Build Status](https://img.shields.io/github/actions/workflow/status/velocitatem/CellViz/ci.yml)](https://github.com/velocitatem/CellViz/actions) [![Language: C++](https://img.shields.io/badge/language-C%2B%2B-%23f34b7d)](https://en.wikipedia.org/wiki/C%2B%2B) [![Platform: Ubuntu](https://img.shields.io/badge/platform-Ubuntu-orange)](https://ubuntu.com/) [![Platform: WSL](https://img.shields.io/badge/platform-Windows-blue)](https://learn.microsoft.com/en-us/windows/wsl/install)
 
 Cellular Automata inspired by live-data visualization, designed to handle multidimensional and high-throughput data efficiently.
 
